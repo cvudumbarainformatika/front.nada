@@ -44,19 +44,19 @@ export default defineConfig((ctx) => {
         // NODE_OPTIONS: '--max-old-space-size=20480',
         API: ctx?.dev
           // ? 'http://192.168.150.112:3501'
-          ? 'http://localhost:8080'
+          ? 'http://103.139.192.183:3501'
           // : 'http://192.168.150.111:3507',
-          : 'http://192.168.150.112:3501',
+          : 'http://103.139.192.183:3501',
 
         WSHOST: ctx?.dev
-          ? '192.168.150.112'
+          ? 'http://103.139.192.183:3501/'
           // ? 'localhost'
-          : '192.168.150.112',
+          : 'http://103.139.192.183:3501/',
 
         PATHIMG: ctx?.dev
           // ? 'http://localhost:8000/storage/'
-          ? 'http://192.168.150.111:3507'
-          : 'http://192.168.150.111:3507',
+          ? 'http://103.139.192.183:3501/'
+          : 'http://103.139.192.183:3501/',
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
