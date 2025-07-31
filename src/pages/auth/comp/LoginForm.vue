@@ -1,30 +1,13 @@
 <template>
   <div class="box">
-    <div
-      class="square"
-      style="--i:0;"
-    />
-    <div
-      class="square"
-      style="--i:1;"
-    />
-    <div
-      class="square"
-      style="--i:2;"
-    />
-    <div
-      class="square"
-      style="--i:3;"
-    />
-    <div
-      class="square"
-      style="--i:4;"
-    />
+    <div class="square" style="--i:0;" />
+    <div class="square" style="--i:1;" />
+    <div class="square" style="--i:2;" />
+    <div class="square" style="--i:3;" />
+    <div class="square" style="--i:4;" />
     <div class="container">
       <div class="row q-pa-sm">
-        <div
-          class="col-6 bg-x min-h"
-        >
+        <div class="col-6 bg-x min-h">
           <div class="column flex-center full-height  text-white">
             <div class="text-subtitle1">
               Selamat Datang
@@ -33,15 +16,11 @@
               di Aplikasi
             </div>
             <div class="text-h5 q-mb-md">
-              XENTER SIMRS
+              SWASTHA
             </div>
-            <q-img
-              :src="img"
-              spinner-color="white"
-              style="max-width: 150px"
-            />
+            <q-img :src="img" spinner-color="white" style="max-width: 150px" />
             <div class="q-mt-md">
-              silahkan Anda Login Terlebih dahulu
+              Silahkan Login Menggunakan Username dan Password Anda
             </div>
           </div>
         </div>
@@ -49,22 +28,13 @@
           <div class="login-form full-height column flex-center text-white q-pa-lg">
             <div class="form q-mb-md">
               <div class="text-h6 judul-form">
-                LOGIN FORM
+                USER LOGIN
               </div>
             </div>
             <div class="q-my-lg full-width">
-              <q-form
-                ref="myForm"
-                class="q-pa-md"
-                @submit="onSubmit"
-              >
-                <q-input
-                  v-model="form.email"
-                  color="white"
-                  label="Username"
-                  dark
-                  :rules="[val => !!val || 'Harap diisi terlebih dahulu']"
-                >
+              <q-form ref="myForm" class="q-pa-md" @submit="onSubmit">
+                <q-input v-model="form.email" color="white" label="Username" dark
+                  :rules="[val => !!val || 'Harap diisi terlebih dahulu']">
                   <template #label>
                     <!-- <span class="text-weight-bold text-deep-orange">You</span> -->
                     <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Username</span>
@@ -73,14 +43,8 @@
                     <q-icon name="icon-mat-person" />
                   </template>
                 </q-input>
-                <q-input
-                  v-model="form.password"
-                  color="white"
-                  label="Password"
-                  dark
-                  :rules="[val => !!val || 'Harap diisi terlebih dahulu']"
-                  :type="isPasw ? 'password' : 'text'"
-                >
+                <q-input v-model="form.password" color="white" label="Password" dark
+                  :rules="[val => !!val || 'Harap diisi terlebih dahulu']" :type="isPasw ? 'password' : 'text'">
                   <template #label>
                     <!-- <span class="text-weight-bold text-deep-orange">You</span> -->
                     <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Password</span>
@@ -89,22 +53,13 @@
                     <q-icon name="icon-mat-key" />
                   </template>
                   <template #append>
-                    <q-icon
-                      :name="isPasw ? 'icon-mat-visibility_off' : 'icon-mat-visibility'"
-                      class="cursor-pointer"
-                      @click="isPasw = !isPasw"
-                    />
+                    <q-icon :name="isPasw ? 'icon-mat-visibility_off' : 'icon-mat-visibility'" class="cursor-pointer"
+                      @click="isPasw = !isPasw" />
                   </template>
                 </q-input>
                 <div class="row q-mt-lg">
-                  <q-btn
-                    push
-                    color="white"
-                    text-color="primary"
-                    label="Login"
-                    type="submit"
-                    :disable="storeAuth.loading"
-                  >
+                  <q-btn push color="white" text-color="primary" label="Login" type="submit"
+                    :disable="storeAuth.loading">
                     <template #loading>
                       <q-spinner-hourglass class="on-right" />
                       Loading...
@@ -146,7 +101,7 @@ const form = ref({
 
 const storeAuth = useAuthStore()
 // const router = useRouter()
-function onSubmit () {
+function onSubmit() {
   const formData = new FormData()
   formData.append('email', form.value.email + '@app.com')
   formData.append('password', form.value.password)
@@ -158,9 +113,10 @@ function onSubmit () {
 <style lang="scss" scoped>
 .app-v {
   position: absolute;
-  bottom:20px;
+  bottom: 20px;
   right: 20px;
 }
+
 .box {
   position: relative;
 
@@ -169,11 +125,11 @@ function onSubmit () {
     // filter: blur(1px);
     backdrop-filter: blur(10px);
     // backdrop-filter: sepia(.2);
-    box-shadow: 0 25px 45px rgba(0,0,0,0.1);
-    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 10px;
-    border-right: 1px solid rgba(255,255,255,0.2);
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     // background: rgba(255,255,255,0.1);
     animation: animate 10s linear infinite;
     animation-delay: calc(-1s * var(--i));
@@ -181,9 +137,12 @@ function onSubmit () {
   }
 
   @keyframes animate {
-    0%,100%{
+
+    0%,
+    100% {
       transform: translateY(-40px);
     }
+
     50% {
       transform: translateY(40px);
     }
@@ -193,38 +152,43 @@ function onSubmit () {
     min-height: 400px;
   }
 
-  .square:nth-child(1){
-      top: -50px;
-      right: -60px;
-      width: 100px;
-      height: 100px;
-    }
-  .square:nth-child(2){
-      top: 150px;
-      left: -100px;
-      width: 120px;
-      height: 120px;
-      z-index: 2;
-    }
-  .square:nth-child(3){
+  .square:nth-child(1) {
+    top: -50px;
+    right: -60px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .square:nth-child(2) {
+    top: 150px;
+    left: -100px;
+    width: 120px;
+    height: 120px;
+    z-index: 2;
+  }
+
+  .square:nth-child(3) {
     bottom: 50px;
     right: -60px;
     width: 80px;
     height: 80px;
     z-index: 2;
   }
-  .square:nth-child(4){
+
+  .square:nth-child(4) {
     bottom: -70px;
     left: 100px;
     width: 50px;
     height: 50px;
   }
-  .square:nth-child(5){
+
+  .square:nth-child(5) {
     top: -30px;
     left: 100px;
     width: 60px;
     height: 60px;
   }
+
   .container {
     position: relative;
     width: 100%;
@@ -233,10 +197,10 @@ function onSubmit () {
     border-radius: 10px;
     backdrop-filter: blur(10px);
     // filter: blur(1px);
-    box-shadow: 0 25px 45px rgba(0,0,0,0.1);
-    border: 2px solid rgba(255,255,255,0.5);
-    border-right: 2px solid rgba(255,255,255,0.2);
-    border-bottom: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     // display: flex;
     // justify-content: center;
     // align-items: center;
@@ -250,11 +214,14 @@ function onSubmit () {
 
   .login-form {
     align-items: flex-start;
+
     .form {
       position: relative;
+
       .judul-form {
         width: 100%;
         position: relative;
+
         &:before {
           content: '';
           position: absolute;

@@ -56,7 +56,7 @@ const router = useRouter()
 const btnPrint = ref()
 
 const info = ref([
-  'Selamat Datang di Aplikasi Xenter UOBK RSUD MOHamad SALEH',
+  'Selamat Datang di Aplikasi SWASTHA',
   'Silahkan Pilih Menu dikiri Aplikasi .... Menu yang tampil Adalah menu yang sesuai dengan hak Akses User Anda',
   'Jika Menu Aplikasi berisi content yang tidak sesuai dengan harapan anda... silahkan mengajukan pembenahan content kepada pihak yang berwenang',
   'Jangan Lupa Tersenyum ... Selamat Bekerja'

@@ -1,15 +1,8 @@
 <template>
   <q-page class="fullscreen bg-img column flex-center">
-    <q-card
-      flat
-      bordered
-      class="card-login"
-    >
+    <q-card flat bordered class="card-login">
       <q-card-section>
-        <div
-          class="text-center"
-          style="margin-top:20px"
-        >
+        <div class="text-center" style="margin-top:20px">
           <q-avatar size="70px">
             <img :src="logo">
           </q-avatar>
@@ -17,37 +10,16 @@
             SISTEM INFORMASI MANAJEMEN RUMAH SAKIT
           </div>
           <div class="text-h6 text-white">
-            RSUD DOKTER MOHAMAD SALEH
+            SWASTHA APP
           </div>
         </div>
-        <q-form
-          ref="myForm"
-          class="q-pa-md"
-          style="margin-top:70px"
-          @submit="onSubmit"
-        >
-          <app-input
-            v-model="form.email"
-            dense
-            label="Nik"
-            icon="icon-mat-person"
-          />
-          <app-input
-            v-model="form.password"
-            dense
-            type="password"
-            label="password"
-            icon="icon-mat-key"
-            class="q-mt-sm"
-          />
+        <q-form ref="myForm" class="q-pa-md" style="margin-top:70px" @submit="onSubmit">
+          <app-input v-model="form.email" dense label="Nik" icon="icon-mat-person" />
+          <app-input v-model="form.password" dense type="password" label="password" icon="icon-mat-key"
+            class="q-mt-sm" />
 
           <div style="margin-top:50px">
-            <app-btn
-              type="submit"
-              :loading="storeAuth.loading"
-              class="full-width"
-              label="Login"
-            />
+            <app-btn type="submit" :loading="storeAuth.loading" class="full-width" label="Login" />
           </div>
         </q-form>
       </q-card-section>
@@ -97,7 +69,7 @@ const logo = computed(() => {
 // console.log(form)
 // console.log(storeAuth)
 // const router = useRouter()
-function onSubmit () {
+function onSubmit() {
   const formData = new FormData()
   formData.append('email', form.value.email + '@app.com')
   formData.append('password', form.value.password)
@@ -131,20 +103,21 @@ function onSubmit () {
 </script>
 
 <style lang="scss" scoped>
+$grad: #187DC1;
 
-$grad:#187DC1;
 // $yel:#FFC257;
 .bg-img {
   background-image: url("../../assets/images/bg2.jpg");
   background-repeat: no-repeat, repeat;
   background-size: cover;
 }
+
 .card-login {
   width: 360px;
   min-height: 530px;
   overflow: hidden;
   position: relative;
-  border:5px solid $warning;
+  border: 5px solid $warning;
 
   &::before {
     content: "";
@@ -182,7 +155,7 @@ $grad:#187DC1;
     width: 100vw;
     height: 100vh;
     border-radius: 0px;
-    border:none;
+    border: none;
 
     &::before {
       width: 100vw;

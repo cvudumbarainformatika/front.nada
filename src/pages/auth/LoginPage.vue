@@ -1,9 +1,6 @@
 <template>
   <q-page class="fullscreen">
-    <app-loader
-      v-if="store.loading"
-      class="dimmed"
-    />
+    <app-loader v-if="store.loading" class="dimmed" />
     <div class="top-page">
       <BoxAnimation class="absolute" />
       <BgAnimation class="z--" />
@@ -15,7 +12,7 @@
     </div>
     <div class="bot column flex-center">
       <div class="text-subtitle">
-        Aplikasi Xenter UOBK RSUD MOHAMAD SALEH
+        SWASTHA app by Udumbarainformatika
       </div>
     </div>
   </q-page>
@@ -32,11 +29,11 @@ const store = useAuthStore()
 </script>
 
 <style lang="scss" scoped>
-$grad:#187DC1;
+$grad: #187DC1;
 
 * {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 }
 
 .top-page {
@@ -45,11 +42,11 @@ $grad:#187DC1;
   background: linear-gradient(60deg, $secondary 0%, $primary 100%);
 
   .inner-top-page {
-      width: 100%;
-      height:100vh;
-      margin:0;
-      padding: 0;
-    }
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
 
 }
 
@@ -64,8 +61,9 @@ $grad:#187DC1;
   width: 100%;
   height: 5vh;
   bottom: 0;
-  background-color: transparent ;
+  background-color: transparent;
 }
+
 .z-- {
   z-index: 0;
   position: absolute;

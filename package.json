@@ -1,8 +1,8 @@
 {
-  "name": "simrs-v3",
-  "version": "3.0.2",
-  "description": "Front Simrs V3",
-  "productName": "Simrs V3",
+  "name": "swastha",
+  "version": "1.0.1",
+  "description": "Front Swastha",
+  "productName": "Swastha",
   "author": "cvudumbarainformatika <cvudumbarainformatika@gmail.com>",
   "type": "module",
   "private": true,

@@ -2,7 +2,7 @@
   <div class="login-form full-height column flex-center text-white q-pa-lg">
     <div class="form q-mb-sm">
       <div class="text-h6 judul-form">
-        LOGIN FORM
+        USER LOGIN
       </div>
     </div>
     <div class="q-my-md full-width">
@@ -40,12 +40,12 @@
               Loading...
             </template>
           </q-btn>
-          <div class="column flex-center cursor-pointer f-12" :class="hoverred ? 'text-red' : 'text-grey-4'"
+          <!-- <div class="column flex-center cursor-pointer f-12" :class="hoverred ? 'text-red' : 'text-grey-4'"
             @mouseover="hoverred = true" @mouseleave="hoverred = false" @click="goToQr()">
             <q-icon name="icon-mat-qr_code_2" size="lg" />
             <div>Login Qr ?</div>
             <div>Klik disini</div>
-          </div>
+          </div> -->
         </div>
       </q-form>
     </div>

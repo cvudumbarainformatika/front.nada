@@ -8,18 +8,14 @@
       <BoxAnimation class="absolute" />
       <BgAnimation class="z--" />
       <div class="inner-top-page column flex-center">
-        <LoginMode
-          class="login-form"
-          :mode="route.params.mode"
-          :loading="store.loading"
-        />
+        <LoginMode class="login-form" :mode="route.params.mode" :loading="store.loading" />
       </div>
 
       <!-- <bgAnimation /> -->
     </div>
     <div class="bot column flex-center">
       <div class="text-subtitle">
-        Aplikasi Xenter UOBK RSUD MOHAMAD SALEH
+        SWASTHA app by Udumbarainformatika
       </div>
     </div>
   </q-page>
@@ -61,11 +57,11 @@ function login(email, token) {
 </script>
 
 <style lang="scss" scoped>
-$grad:#187DC1;
+$grad: #187DC1;
 
 * {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 }
 
 .top-page {
@@ -74,11 +70,11 @@ $grad:#187DC1;
   background: linear-gradient(60deg, $secondary 0%, $primary 100%);
 
   .inner-top-page {
-      width: 100%;
-      height:100vh;
-      margin:0;
-      padding: 0;
-    }
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
 
 }
 
@@ -95,13 +91,15 @@ $grad:#187DC1;
     z-index: 2;
   }
 }
+
 .bot {
   position: absolute;
   width: 100%;
   height: 5vh;
   bottom: 0;
-  background-color: transparent ;
+  background-color: transparent;
 }
+
 .z-- {
   z-index: 0;
   position: absolute;
