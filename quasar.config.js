@@ -49,9 +49,9 @@ export default defineConfig((ctx) => {
           : 'http://103.139.192.183:3501',
 
         WSHOST: ctx?.dev
-          ? 'http://103.139.192.183:3501/'
+          ? '103.139.192.183'
           // ? 'localhost'
-          : 'http://103.139.192.183:3501/',
+          : '103.139.192.183',
 
         PATHIMG: ctx?.dev
           // ? 'http://localhost:8000/storage/'
