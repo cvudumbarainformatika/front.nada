@@ -60,7 +60,7 @@ onMounted(() => {
     height: 60px;
     background-color: transparent;
     border: 6px solid rgba(255, 255, 255, 0.8);
-
+    border-radius: 30%;
     // Performance optimizations
     will-change: transform, opacity;
     backface-visibility: hidden;

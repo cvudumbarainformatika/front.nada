@@ -4,12 +4,12 @@
       <div class="row items-center">
         <div v-if="!isMobile">
           <q-avatar size="40px">
-            <img src="~assets/logos/logo-rsud.png">
+            <img src="~assets/logos/logo-Udumbara.png">
           </q-avatar>
         </div>
         <div v-if="!isMobile" class="q-ml-sm text-white">
           <div class="text-h6">
-            UOBK RSUD MOHAMAD SALEH
+            SWASTHA
           </div>
           <!-- <div class="text-subtitle">
             KOTA PROBOLINGGO
