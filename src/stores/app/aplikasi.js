@@ -21,7 +21,7 @@ export const useAplikasiStore = defineStore('aplikasiX', {
       { nama: 'Depo Rawat inap', value: 'Gd-04010102' },
       { nama: 'Depo OK', value: 'Gd-04010103' },
       { nama: 'Depo Rawat Jalan', value: 'Gd-05010101' },
-      { nama: 'Depo IGD', value: 'Gd-02010104' }
+      { nama: 'Depo IGD', value: 'Gd-04010104' }
     ],
 
     notifRkd: null
@@ -31,46 +31,46 @@ export const useAplikasiStore = defineStore('aplikasiX', {
   getters: {
   },
   actions: {
-    getItems() {
+    getItems () {
       this.loading = true
       this.items = storage.getApps('apps') ? storage.getApps('apps') : []
       this.loading = false
     },
-    setSistemBayars(val) {
+    setSistemBayars (val) {
       this.sistemBayars = val
     },
 
-    setItems(val) {
+    setItems (val) {
       // console.log('set items', val)
       this.items = val
     },
-    setGudang(val) {
+    setGudang (val) {
       // console.log('set gudang', val)
       this.gudangs = val
     },
-    setPoli(val) {
+    setPoli (val) {
       // console.log('set poli', val)
       this.polis = val
     },
-    setRuang(val) {
+    setRuang (val) {
       // console.log('set poli', val)
       this.ruangs = val
     },
-    setUser(val) {
+    setUser (val) {
       this.user = val
     },
-    setAkunGit(val) {
+    setAkunGit (val) {
       this.git = val
     },
-    setUserKey(key, val) {
+    setUserKey (key, val) {
       // console.log('set user key', val)
       this.user[key] = val
     },
-    setAksesApps(val) {
+    setAksesApps (val) {
       this.aksesApps = val
       // console.log('set akses apps', val, this.user)
     },
-    setCurrentApp(val) {
+    setCurrentApp (val) {
       return new Promise((resolve, reject) => {
         try {
           this.currentApp = val

@@ -33,7 +33,7 @@ export const usePerbaikanHargaFarmasiStore = defineStore('perbaikan_harga_farmas
       { nama: 'Depo Rawat inap', kode: 'Gd-04010102' },
       { nama: 'Depo OK', kode: 'Gd-04010103' },
       { nama: 'Depo Rawat Jalan', kode: 'Gd-05010101' },
-      { nama: 'Depo IGD', kode: 'Gd-02010104' }
+      { nama: 'Depo IGD', kode: 'Gd-04010104' }
     ]
   }),
   actions: {

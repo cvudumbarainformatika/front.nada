@@ -32,7 +32,7 @@ export const usePermintaanEResepStore = defineStore('permintaan_e_resep', {
       { nama: 'Depo Rawat inap', value: 'Gd-04010102', jenis: 'rnp' },
       { nama: 'Depo OK', value: 'Gd-04010103', jenis: 'ok' },
       { nama: 'Depo Rawat Jalan', value: 'Gd-05010101', jenis: 'rjl' },
-      { nama: 'Depo IGD', value: 'Gd-02010104', jenis: 'igd' }
+      { nama: 'Depo IGD', value: 'Gd-04010104', jenis: 'igd' }
     ],
     nonFilteredObat: [],
     dpPar: '',
@@ -774,7 +774,7 @@ export const usePermintaanEResepStore = defineStore('permintaan_e_resep', {
         }
       }
 
-      // if (depo[0]?.value !== 'Gd-02010104') {
+      // if (depo[0]?.value !== 'Gd-04010104') {
       if (this.pasien.groups !== val?.sistembayar?.groups) {
         this.loading = false
         return notifErrVue('Maaf sistem bayar pasien, tidak sama dengan sistem bayar resep yang diduplicate!!!')

@@ -29,7 +29,7 @@ export const useDuplicateEResepStore = defineStore('duplicate_e_resep', {
       { nama: 'Depo Rawat inap', value: 'Gd-04010102', jenis: 'rnp' },
       { nama: 'Depo OK', value: 'Gd-04010103', jenis: 'ok' },
       { nama: 'Depo Rawat Jalan', value: 'Gd-05010101', jenis: 'rjl' },
-      { nama: 'Depo IGD', value: 'Gd-02010104', jenis: 'igd' }
+      { nama: 'Depo IGD', value: 'Gd-04010104', jenis: 'igd' }
     ],
     nonFilteredObat: [],
     dpPar: '',
@@ -197,7 +197,7 @@ export const useDuplicateEResepStore = defineStore('duplicate_e_resep', {
           //   if (index >= 0)racikan[0]?.rincian?.splice(index, 1)
           if (racikan?.rincian?.length > 1) {
             const index = racikan?.rincian?.findIndex(x => x.id === obat?.id)
-            if (index >= 0)racikan?.rincian?.splice(index, 1)
+            if (index >= 0) racikan?.rincian?.splice(index, 1)
           }
           else {
             const index = this?.listRacikan?.findIndex(x => x.namaracikan === obat?.namaracikan)

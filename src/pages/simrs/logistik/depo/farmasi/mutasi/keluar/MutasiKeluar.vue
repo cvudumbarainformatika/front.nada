@@ -5,27 +5,11 @@
         Halaman Mutasi Keluar Antar Depo
       </div>
     </div>
-    <app-table-extend
-      :columns="store.columns"
-      :items="store.items"
-      :meta="store.meta"
-      :per-page="store.params.per_page"
-      :loading="store.loading"
-      :to-search="store.params.no_permintaan"
-      :click-able="true"
-      :default-btn="false"
-      :ada-tambah="false"
-      :ada-filter="false"
-      :ada-cari="false"
-      row-no
-      use-full
-      text-cari="Cari ..."
-      @find="store.setSearch"
-      @goto="store.setPage"
-      @set-row="store.setPerPage"
-      @refresh="store.refreshTable"
-      @on-click="onClick"
-    >
+    <app-table-extend :columns="store.columns" :items="store.items" :meta="store.meta" :per-page="store.params.per_page"
+      :loading="store.loading" :to-search="store.params.no_permintaan" :click-able="true" :default-btn="false"
+      :ada-tambah="false" :ada-filter="false" :ada-cari="false" row-no use-full text-cari="Cari ..."
+      @find="store.setSearch" @goto="store.setPage" @set-row="store.setPerPage" @refresh="store.refreshTable"
+      @on-click="onClick">
       <!-- @edit-data="store.editData" -->
       <!--
             row-image="image"
@@ -87,7 +71,7 @@
       </template>
       <template #cell-tgl_permintaan="{ row }">
         <div class="row justify-between no-wrap">
-          {{ row.tgl_permintaan ? dateFullFormat(row.tgl_permintaan):'-' }}
+          {{ row.tgl_permintaan ? dateFullFormat(row.tgl_permintaan) : '-' }}
         </div>
       </template>
       <template #cell-no_permintaan="{ row }">
@@ -99,17 +83,12 @@
       </template>
       <template #cell-dari="{ row }">
         <div class="row justify-between no-wrap">
-          {{ row.dari?depo(row?.dari) :'-' }}
+          {{ row.dari ? depo(row?.dari) : '-' }}
         </div>
       </template>
       <template #cell-status="{ row }">
         <div class="row">
-          <q-chip
-            class="f-10"
-            :color="color(row.flag)"
-            :label="label(row.flag)"
-            text-color="white"
-          />
+          <q-chip class="f-10" :color="color(row.flag)" :label="label(row.flag)" text-color="white" />
         </div>
       </template>
       <template #cell-user="{ row }">
@@ -119,108 +98,51 @@
       </template>
       <template #cell-act="{ row }">
         <div class="row">
-          <div v-if="row.flag==='3' || row.flag==='4'">
-            <q-btn
-              round
-              icon="icon-mat-print"
-              dense
-              color="dark"
-              size="sm"
-              @click="toPrint(row)"
-            >
-              <q-tooltip
-                class="primary"
-                :offset="[10, 10]"
-              >
+          <div v-if="row.flag === '3' || row.flag === '4'">
+            <q-btn round icon="icon-mat-print" dense color="dark" size="sm" @click="toPrint(row)">
+              <q-tooltip class="primary" :offset="[10, 10]">
                 Print
               </q-tooltip>
             </q-btn>
           </div>
-          <div v-if="row.flag==='3'">
-            <q-btn
-              flat
-              icon="icon-mat-lock"
-              dense
-              color="negative"
-              :loading="store.loadingKunci && row.no_permintaan === toloadBeli"
-            >
+          <div v-if="row.flag === '3'">
+            <q-btn flat icon="icon-mat-lock" dense color="negative"
+              :loading="store.loadingKunci && row.no_permintaan === toloadBeli">
               <!-- @click="kunci(row)" -->
-              <q-tooltip
-                class="primary"
-                :offset="[10, 10]"
-              >
+              <q-tooltip class="primary" :offset="[10, 10]">
                 Sudah di kirim ke depo
               </q-tooltip>
             </q-btn>
           </div>
-          <div v-if="row.flag==='1'" class="row justify-between items-center" style="min-width: 150px;">
+          <div v-if="row.flag === '1'" class="row justify-between items-center" style="min-width: 150px;">
             <div class="col-auto">
-              <q-btn
-                flat
-                icon="icon-mat-move_to_inbox"
-                dense
-                color="primary"
-                :loading="store.loadingKunci && row.no_permintaan === toloadBeli"
-                @click="kunci(row)"
-              >
-                <q-tooltip
-                  class="primary"
-                  :offset="[10, 10]"
-                >
+              <q-btn flat icon="icon-mat-move_to_inbox" dense color="primary"
+                :loading="store.loadingKunci && row.no_permintaan === toloadBeli" @click="kunci(row)">
+                <q-tooltip class="primary" :offset="[10, 10]">
                   Terima
                 </q-tooltip>
               </q-btn>
             </div>
             <div class="col-auto">
-              <q-btn
-                flat
-                icon="icon-mat-hand-front-left"
-                size="sm"
-                dense
-                color="negative"
-                :loading="row?.loading"
-                :disable="row?.loading"
-                @click="tolak(row)"
-              >
-                <q-tooltip
-                  class="primary"
-                  :offset="[10, 10]"
-                >
+              <q-btn flat icon="icon-mat-hand-front-left" size="sm" dense color="negative" :loading="row?.loading"
+                :disable="row?.loading" @click="tolak(row)">
+                <q-tooltip class="primary" :offset="[10, 10]">
                   Tolak
                 </q-tooltip>
               </q-btn>
             </div>
           </div>
           <!-- {{ row?.permintaanrinci?.map(x=>x.distribusi).reduce((a,b)=>a+b,0) }} -->
-          <div
-            v-if="row.flag==='2' && row?.permintaanrinci?.map(x=>x.distribusi).reduce((a,b)=>a+b,0) > 0"
-            :key="row"
-          >
-            <q-btn
-              flat
-              icon="icon-mat-done_all"
-              label="selesai"
-              dense
-              color="green"
-              :loading="store.loadingKunci && row.no_permintaan === toloadBeli"
-              @click="distribusikan(row)"
-            >
-              <q-tooltip
-                class="primary"
-                :offset="[10, 10]"
-              >
+          <div v-if="row.flag === '2' && row?.permintaanrinci?.map(x => x.distribusi).reduce((a, b) => a + b, 0) > 0" :key="row">
+            <q-btn flat icon="icon-mat-done_all" label="selesai" dense color="green"
+              :loading="store.loadingKunci && row.no_permintaan === toloadBeli" @click="distribusikan(row)">
+              <q-tooltip class="primary" :offset="[10, 10]">
                 Distribusikan
               </q-tooltip>
             </q-btn>
           </div>
-          <div
-            v-else
-            class="text-primary text-weight-bold"
-          >
-            <q-tooltip
-              class="primary"
-              :offset="[10, 10]"
-            >
+          <div v-else class="text-primary text-weight-bold">
+            <q-tooltip class="primary" :offset="[10, 10]">
               Tidak Ada yang perlu dilakukan
             </q-tooltip>
           </div>
@@ -243,16 +165,9 @@
             </div>
           </div>
           <q-separator />
-          <div
-            v-for="(rin, i) in row.permintaanrinci"
-            :key="i"
-          >
-            <CompDistribusi
-              :row="row" :rin="rin"
-              @minta="setMinta($event,rin)"
-              @distribusi="setDist($event,rin)"
-              @editable="setEdit($event,rin)"
-            />
+          <div v-for="(rin, i) in row.permintaanrinci" :key="i">
+            <CompDistribusi :row="row" :rin="rin" @minta="setMinta($event, rin)" @distribusi="setDist($event, rin)"
+              @editable="setEdit($event, rin)" />
 
             <q-separator />
           </div>
@@ -263,23 +178,16 @@
       </template>
     </app-table-extend>
   </div>
-  <app-print-surat
-    ref="dialogPrint"
-    v-model="store.isOpen"
-    :tanggal="store.dataToPrint?.flag==='1'?store.dataToPrint?.tgl_kirim:store.dataToPrint?.tgl_terima_depo"
-    @close="store.isOpen=false"
-  >
+  <app-print-surat ref="dialogPrint" v-model="store.isOpen"
+    :tanggal="store.dataToPrint?.flag === '1' ? store.dataToPrint?.tgl_kirim : store.dataToPrint?.tgl_terima_depo"
+    @close="store.isOpen = false">
     <template #isi>
       <!-- Top words -->
-      <div
-        class="row justify-center q-mt-md f-16 text-weight-bold"
-      >
+      <div class="row justify-center q-mt-md f-16 text-weight-bold">
         DATA DISTRIBUSI
       </div>
 
-      <div
-        class="row justify-center q-mb-sm"
-      >
+      <div class="row justify-center q-mb-sm">
         <div class="col-2">
           Tanggal Distribusi
         </div>
@@ -301,13 +209,11 @@
           {{ store.dataToPrint?.no_permintaan }}
         </div>
       </div>
-      <div
-        class="row justify-start q-mb-md"
-      >
+      <div class="row justify-start q-mb-md">
         <p>
           Telah di kirimkan ke
           <span class="text-weight-bold">
-            {{ store.dataToPrint?.asal?store.dataToPrint?.asal.nama:'-' }}
+            {{ store.dataToPrint?.asal ? store.dataToPrint?.asal.nama : '-' }}
           </span> barang dalam list dibawah ini :
         </p>
       </div>
@@ -334,37 +240,23 @@
           </div>
         </div>
         <!-- body details -->
-        <div
-          v-for="(det, i) in store.dataToPrint?.permintaanrinci"
-          :key="i"
-        >
-          <div
-            class="row justify-between q-col-gutter-sm"
-          >
+        <div v-for="(det, i) in store.dataToPrint?.permintaanrinci" :key="i">
+          <div class="row justify-between q-col-gutter-sm">
             <div class="col-5 border-bottom border-left">
-              {{ i+1 }}. {{ det.masterobat?det.masterobat.nama_obat:'Nama barang tidak ditemukan' }}
+              {{ i + 1 }}. {{ det.masterobat ? det.masterobat.nama_obat : 'Nama barang tidak ditemukan' }}
             </div>
-            <div
-              class="col-1 border-bottom border-left"
-            >
-              {{ det.distribusi===null?0:det.distribusi }}
+            <div class="col-1 border-bottom border-left">
+              {{ det.distribusi === null ? 0 : det.distribusi }}
             </div>
-            <div
-              class="col-2 border-bottom border-left"
-            >
-              {{ det.masterobat?det.masterobat.satuan_k:'-' }}
+            <div class="col-2 border-bottom border-left">
+              {{ det.masterobat ? det.masterobat.satuan_k : '-' }}
             </div>
             <div class="col-4 border-bottom border-left border-right">
               <div class="print-only">
-                {{ det?.keterangan??'-' }}
+                {{ det?.keterangan ?? '-' }}
               </div>
               <div class="print-hide">
-                <app-input
-                  v-model="det.keterangan"
-                  label="keterangan"
-                  outlined
-                  valid
-                />
+                <app-input v-model="det.keterangan" label="keterangan" outlined valid />
               </div>
             </div>
           </div>
@@ -403,7 +295,7 @@ onMounted(() => {
   store.getInitialData()
 })
 
-const gud = ['Gd-03010101', 'Gd-04010102', 'Gd-04010103', 'Gd-05010101', 'Gd-02010104']
+const gud = ['Gd-03010101', 'Gd-04010102', 'Gd-04010103', 'Gd-05010101', 'Gd-04010104']
 watch(() => apps?.user?.kdruangansim, (obj) => {
   store.setForm('kdgudang', obj)
   store.setParams('kdgudang', obj)
@@ -610,10 +502,12 @@ const label = (status) => {
   inline-size: 170px;
   overflow-wrap: break-word;
 }
-.rouded-border{
+
+.rouded-border {
   border-radius: 5px;
 }
-.space-normal{
+
+.space-normal {
   white-space: normal;
 }
 </style>

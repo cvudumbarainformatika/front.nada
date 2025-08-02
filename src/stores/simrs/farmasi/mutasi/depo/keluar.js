@@ -10,7 +10,7 @@ export const useMutasiKeluarAntarDepoStore = defineStore('mutasi_keluar_antar_de
     loadingCariPermintaan: false,
     loadingKunci: false,
     items: [],
-    meta: { },
+    meta: {},
     params: {
       page: 1,
       q: '',
@@ -40,7 +40,7 @@ export const useMutasiKeluarAntarDepoStore = defineStore('mutasi_keluar_antar_de
       { nama: 'Depo Rawat inap', value: 'Gd-04010102' },
       { nama: 'Depo OK', value: 'Gd-04010103' },
       { nama: 'Depo Rawat Jalan', value: 'Gd-05010101' },
-      { nama: 'Depo IGD', value: 'Gd-02010104' }
+      { nama: 'Depo IGD', value: 'Gd-04010104' }
     ],
     statuses: [
       { nama: 'Tampilkan semua', value: '', color: 'grey' },
@@ -116,7 +116,7 @@ export const useMutasiKeluarAntarDepoStore = defineStore('mutasi_keluar_antar_de
           filterKeys.some(
             (key) =>
               item[key].toString().toLowerCase().includes(value.toLowerCase()) &&
-                item[key]
+              item[key]
           )
         )
       const filteredData = multiFilter(this.items, splits, needle)

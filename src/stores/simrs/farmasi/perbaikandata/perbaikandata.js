@@ -32,7 +32,7 @@ export const usePerbaikanDataFarmasiStore = defineStore('perbaikan_data_farmasi'
       { nama: 'Depo Rawat inap', kode: 'Gd-04010102' },
       { nama: 'Depo OK', kode: 'Gd-04010103' },
       { nama: 'Depo Rawat Jalan', kode: 'Gd-05010101' },
-      { nama: 'Depo IGD', kode: 'Gd-02010104' }
+      { nama: 'Depo IGD', kode: 'Gd-04010104' }
     ],
     /// detail seections gudang
     openMutasi: false,

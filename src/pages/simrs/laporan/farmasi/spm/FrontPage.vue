@@ -445,11 +445,11 @@ function setJenisLaporan (val) {
       store.params.response_time = 'Obat'
       store.tujuanMinta = 'Gudang'
     }
-    store.setParams('depo', ['Gd-04010102', 'Gd-05010101', 'Gd-02010104'])
+    store.setParams('depo', ['Gd-04010102', 'Gd-05010101', 'Gd-04010104'])
     store.depos = [
       { nama: 'Depo Rawat inap', value: 'Gd-04010102' },
       { nama: 'Depo Rawat Jalan', value: 'Gd-05010101' },
-      { nama: 'Depo IGD', value: 'Gd-02010104' },
+      { nama: 'Depo IGD', value: 'Gd-04010104' },
       { nama: 'Depo OK', value: 'Gd-04010103' },
     ]
   }

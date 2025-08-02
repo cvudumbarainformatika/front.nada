@@ -63,7 +63,7 @@ export const useSPJOPNameStore = defineStore('spjopname', {
       { nama: 'Gudang Farmasi (Floor Stok)', kode: 'Gd-03010100', opname: [] },
       { nama: 'Depo Rawat Jalan', kode: 'Gd-05010101', opname: [] },
       { nama: 'Depo Rawat inap', kode: 'Gd-04010102', opname: [] },
-      { nama: 'Depo IGD', kode: 'Gd-02010104', opname: [] },
+      { nama: 'Depo IGD', kode: 'Gd-04010104', opname: [] },
       { nama: 'Depo OK', kode: 'Gd-04010103', opname: [] },
       { nama: 'Floor Stock 1 (AKHP)', kode: 'Gd-03010101', opname: [] }
     ],
@@ -72,7 +72,7 @@ export const useSPJOPNameStore = defineStore('spjopname', {
       { label: 'Gudang Farmasi (Floor Stok)', value: 'Gd-03010100' },
       { label: 'Depo Rawat Jalan', value: 'Gd-05010101' },
       { label: 'Depo Rawat inap', value: 'Gd-04010102' },
-      { label: 'Depo IGD', value: 'Gd-02010104' },
+      { label: 'Depo IGD', value: 'Gd-04010104' },
       { label: 'Depo OK', value: 'Gd-04010103' },
       { label: 'Floor Stock 1 (AKHP)', value: 'Gd-03010101' }
     ],

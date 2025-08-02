@@ -35,7 +35,7 @@ export const useDistribusiPenerimaanRuanganStore = defineStore('distribusi_pener
       { nama: 'Depo Rawat inap', value: 'Gd-04010102' },
       { nama: 'Depo OK', value: 'Gd-04010103' },
       { nama: 'Depo Rawat Jalan', value: 'Gd-05010101' },
-      { nama: 'Depo IGD', value: 'Gd-02010104' }
+      { nama: 'Depo IGD', value: 'Gd-04010104' }
     ],
     statuses: [
       { nama: 'Tampilkan semua', value: '', color: 'grey' },
@@ -45,34 +45,34 @@ export const useDistribusiPenerimaanRuanganStore = defineStore('distribusi_pener
     columnsHide: []
   }),
   actions: {
-    setForm(key, val) {
+    setForm (key, val) {
       this.form[key] = val
     },
-    setParams(key, val) {
+    setParams (key, val) {
       this.params[key] = val
     },
-    setSearch(val) {
+    setSearch (val) {
       this.setParams('no_permintaan', val)
       this.setParams('page', 1)
       this.getPermintaanDepo()
     },
-    setPage(val) {
+    setPage (val) {
       this.setParams('page', val)
       this.getPermintaanDepo()
     },
-    setPerPage(val) {
+    setPerPage (val) {
       this.setParams('per_page', val)
       this.setParams('page', 1)
       this.getPermintaanDepo()
     },
-    refreshTable(val) {
+    refreshTable (val) {
       this.setParams('page', 1)
       this.getPermintaanDepo()
     },
-    getInitialData() {
+    getInitialData () {
       this.getPermintaanDepo()
     },
-    getPermintaanDepo() {
+    getPermintaanDepo () {
       this.loading = true
       const param = { params: this.params }
       return new Promise(resolve => {
@@ -88,7 +88,7 @@ export const useDistribusiPenerimaanRuanganStore = defineStore('distribusi_pener
           .catch(() => { this.loading = false })
       })
     },
-    simpanDetail(val) {
+    simpanDetail (val) {
       this.loadingSimpan = true
       return new Promise(resolve => {
         api.post('v1/simrs/farmasinew/depo/terimadistribusi', val)

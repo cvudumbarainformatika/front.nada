@@ -1,17 +1,9 @@
 <template>
-  <div
-    class="column full-height q-ma-sm"
-  >
+  <div class="column full-height q-ma-sm">
     <div v-if="!bisa">
-      <div
-        class="bg-yellow-2 wrap columns content-center"
-        style="height: 90vh; width: 100%;"
-      >
+      <div class="bg-yellow-2 wrap columns content-center" style="height: 90vh; width: 100%;">
         <div class="text-negative text-center">
-          <q-icon
-            name="icon-mat-warning"
-            size="100px"
-          />
+          <q-icon name="icon-mat-warning" size="100px" />
         </div>
         <div class="text-negative f-20  text-center">
           Tidak Bisa Melakukan Penjualan Langsung
@@ -20,17 +12,8 @@
     </div>
     <div v-if="bisa" class="column full-height">
       <div class="col-auto bg-red">
-        <q-tabs
-          v-model="tab"
-          no-caps
-          inline-label
-          class="bg-primary text-white shadow-2"
-          align="left"
-          dense
-          active-color="yellow"
-          active-bg-color="dark"
-          @update:model-value="cekPanel"
-        >
+        <q-tabs v-model="tab" no-caps inline-label class="bg-primary text-white shadow-2" align="left" dense
+          active-color="yellow" active-bg-color="dark" @update:model-value="cekPanel">
           <template v-for="opt in optionTabs" :key="opt">
             <q-tab :name="opt.name" :label="opt.label" />
           </template>
@@ -38,20 +21,9 @@
       </div>
 
       <div class="col-auto bg-yellow">
-        <q-tab-panels
-          v-model="tab"
-          animated
-          class="full-height"
-        >
-          <q-tab-panel
-            v-for="(panel, n) in optionTabs"
-            :key="n"
-            :name="panel.name"
-            class="full-height q-pa-none"
-          >
-            <component
-              :is="cekPanel()"
-            />
+        <q-tab-panels v-model="tab" animated class="full-height">
+          <q-tab-panel v-for="(panel, n) in optionTabs" :key="n" :name="panel.name" class="full-height q-pa-none">
+            <component :is="cekPanel()" />
           </q-tab-panel>
         </q-tab-panels>
       </div>
@@ -82,7 +54,7 @@ const cekPanel = () => {
 const store = usePenjualanBebasFarmasiStore()
 
 const apps = useAplikasiStore()
-const depoRet = ['Gd-04010102', 'Gd-02010104', 'Gd-05010101']
+const depoRet = ['Gd-04010102', 'Gd-04010104', 'Gd-05010101']
 const bisa = ref(false)
 
 onMounted(() => {
@@ -96,7 +68,7 @@ onMounted(() => {
   else notifErrVue('Tidak boleh melakukan Penjualan bebas')
 })
 watch(() => apps?.user?.kdruangansim, (obj) => {
-  const depoRet = ['Gd-04010102', 'Gd-02010104', 'Gd-05010101']
+  const depoRet = ['Gd-04010102', 'Gd-04010104', 'Gd-05010101']
   const depos = apps.depos.filter(a => depoRet.includes(a.value))
   const depo = depos.filter(a => a.value === obj)
   console.log('depos', depos)

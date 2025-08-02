@@ -20,7 +20,7 @@ export const useLaporanSpmFarmasiStore = defineStore('laporan_spm_farmasi', {
       bulan: date.formatDate(Date.now(), 'MM'), // aslinya
       tahun: date.formatDate(Date.now(), 'YYYY'),
       kelompok: null,
-      depo: ['Gd-04010102', 'Gd-05010101', 'Gd-02010104'],
+      depo: ['Gd-04010102', 'Gd-05010101', 'Gd-04010104'],
       sistem_bayar: [],
       generik: 'Semua',
       formularium: 'Semua',
@@ -59,7 +59,7 @@ export const useLaporanSpmFarmasiStore = defineStore('laporan_spm_farmasi', {
     depos: [
       { nama: 'Depo Rawat inap', value: 'Gd-04010102' },
       { nama: 'Depo Rawat Jalan', value: 'Gd-05010101' },
-      { nama: 'Depo IGD', value: 'Gd-02010104' },
+      { nama: 'Depo IGD', value: 'Gd-04010104' },
       { nama: 'Depo OK', value: 'Gd-04010103' },
     ],
     optionKelompoks: [],   // ini kelompok penyimpanan di master obat
@@ -92,13 +92,13 @@ export const useLaporanSpmFarmasiStore = defineStore('laporan_spm_farmasi', {
       this.items = []
       if (val == 'Floor Stok') {
         this.depos.push({ nama: 'Floor Stok', value: 'Gd-03010101' })
-        this.setParams('depo', ['Gd-04010102', 'Gd-05010101', 'Gd-02010104', 'Gd-04010103', 'Gd-03010101'])
+        this.setParams('depo', ['Gd-04010102', 'Gd-05010101', 'Gd-04010104', 'Gd-04010103', 'Gd-03010101'])
       } else {
         const index = this.depos.findIndex((item) => item.nama == 'Floor Stok')
         if (index > -1) {
           this.depos.splice(index, 1)
         }
-        this.setParams('depo', ['Gd-04010102', 'Gd-05010101', 'Gd-02010104'])
+        this.setParams('depo', ['Gd-04010102', 'Gd-05010101', 'Gd-04010104'])
       }
       this.filterAndSetItemRespons()
     },

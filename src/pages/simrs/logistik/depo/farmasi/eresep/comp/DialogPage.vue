@@ -190,7 +190,7 @@
       </div>
     </div>
 
-    <div v-if="apps?.user?.kdruangansim === 'Gd-04010102' || apps?.user?.kdruangansim === 'Gd-02010104'"
+    <div v-if="apps?.user?.kdruangansim === 'Gd-04010102' || apps?.user?.kdruangansim === 'Gd-04010104'"
       class="row justify-end q-ma-sm">
       <div class="col-auto q-px-sm">
         <q-btn no-caps dense class="f-10 q-mb-xs" color="dark" text-color="white" label="Etiket Pagi"
@@ -369,7 +369,7 @@
                         </q-tooltip>
                       </q-btn>
                       <div
-                        v-if="apps?.user?.kdruangansim === 'Gd-04010102' || apps?.user?.kdruangansim === 'Gd-02010104'">
+                        v-if="apps?.user?.kdruangansim === 'Gd-04010102' || apps?.user?.kdruangansim === 'Gd-04010104'">
                         <div class="row justify-end">
                           <q-checkbox v-model="rinc.etiket" size="xs" @update:model-value="setRincRanap(rinc, $event)">
                             <q-tooltip>
@@ -443,14 +443,14 @@
               <div class="col-auto q-mr-lg">
 
                 <q-btn
-                  v-if="apps?.user?.kdruangansim === 'Gd-05010101' || apps?.user?.kdruangansim === 'Gd-04010102' || apps?.user?.kdruangansim === 'Gd-02010104'"
+                  v-if="apps?.user?.kdruangansim === 'Gd-05010101' || apps?.user?.kdruangansim === 'Gd-04010102' || apps?.user?.kdruangansim === 'Gd-04010104'"
                   round class="f-10 q-my-sm" color="dark" text-color="white" icon="icon-mat-print"
                   @click="openRajal(item)">
                   <q-tooltip class="primary" :offset="[10, 10]">
                     Print Etiket Rajal
                   </q-tooltip>
                 </q-btn>
-                <div v-if="apps?.user?.kdruangansim === 'Gd-04010102' || apps?.user?.kdruangansim === 'Gd-02010104'"
+                <div v-if="apps?.user?.kdruangansim === 'Gd-04010102' || apps?.user?.kdruangansim === 'Gd-04010104'"
                   class="row">
                   <q-checkbox v-model="item.etiket" size="xs" @update:model-value="setRincRanap(item, $event)">
                     <q-tooltip>

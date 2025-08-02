@@ -32,14 +32,14 @@ export const useAuthStore = defineStore('auth', {
     onlineUsers: []
   }),
   getters: {
-    isAuth(state) {
+    isAuth (state) {
       return state.token !== null || state.token !== undefined
     },
     getToken: () => storage.getLocalToken(),
     userGetter: () => storage.getUser() !== null || storage.getUser() !== undefined
   },
   actions: {
-    loginQr(payload) {
+    loginQr (payload) {
       this.loading = true
       return new Promise((resolve, reject) => {
         api.post('/v1/login-qr', payload).then(resp => {
@@ -59,7 +59,7 @@ export const useAuthStore = defineStore('auth', {
           })
       })
     },
-    login(payload) {
+    login (payload) {
       this.loading = true
       this.titleLoading = 'SEDANG SINKRON DATA'
       // waitLoad('show')
@@ -84,7 +84,7 @@ export const useAuthStore = defineStore('auth', {
           })
       })
     },
-    SET_TOKEN_USER(token, auth) {
+    SET_TOKEN_USER (token, auth) {
       storage.setHeaderToken(token)
         .then(() => {
           this.token = token
@@ -107,7 +107,7 @@ export const useAuthStore = defineStore('auth', {
       //   this.loading = false
       // }, 1000)
     },
-    REMOVE_LOKAL() {
+    REMOVE_LOKAL () {
       storage.clearStore()
       storage.deleteLocalToken()
       storage.deleteHeaderToken()
@@ -120,7 +120,7 @@ export const useAuthStore = defineStore('auth', {
       this.user = null
       this.token = ''
     },
-    async getUser() {
+    async getUser () {
       try {
         await api.get('/v1/me').then(resp => {
           // console.log('me', resp)
@@ -133,7 +133,7 @@ export const useAuthStore = defineStore('auth', {
         removeToken()
       }
     },
-    async getUserNew() {
+    async getUserNew () {
       this.loading = true
 
       await api.get('/v1/authuser').then(resp => {
@@ -185,7 +185,7 @@ export const useAuthStore = defineStore('auth', {
           //       { nama: 'Depo Rawat inap', value: 'Gd-04010102' },
           //       { nama: 'Depo OK', value: 'Gd-04010103' },
           //       { nama: 'Depo Rawat Jalan', value: 'Gd-05010101' },
-          //       { nama: 'Depo IGD', value: 'Gd-02010104' }
+          //       { nama: 'Depo IGD', value: 'Gd-04010104' }
           //     ]
           //   }
           //   localStorage.setItem('aplikasiX', JSON.stringify(temp))
@@ -231,7 +231,7 @@ export const useAuthStore = defineStore('auth', {
         })
     },
 
-    logout() {
+    logout () {
       waitLoad('show')
       this.titleLoading = 'LOGGING OUT'
       // try {

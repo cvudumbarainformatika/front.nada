@@ -50,7 +50,7 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
       { nama: 'Depo Rawat inap', value: 'Gd-04010102', jenis: 'rnp' },
       { nama: 'Depo OK', value: 'Gd-04010103', jenis: 'ok' },
       { nama: 'Depo Rawat Jalan', value: 'Gd-05010101', jenis: 'rjl' },
-      { nama: 'Depo IGD', value: 'Gd-02010104', jenis: 'igd' }
+      { nama: 'Depo IGD', value: 'Gd-04010104', jenis: 'igd' }
     ],
     obats: [],
     obatTerpilih: null,
@@ -60,10 +60,10 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
     signas: []
   }),
   actions: {
-    setForm(key, val) {
+    setForm (key, val) {
       this.form[key] = val
     },
-    resetObat() {
+    resetObat () {
       this.form.jumlah = 0
       this.form.keterangan = '-'
       this.form.aturan = ''
@@ -71,7 +71,7 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
       this.form.konsumsi = ''
       this.obatTerpilih = null
     },
-    setPasien(val) {
+    setPasien (val) {
       const list = useListResepDepoStore()
       console.log('pasien', val)
       console.log('jenis pasien', this.jenispasien)
@@ -104,7 +104,7 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
         this.getDataObat(param)
       }
     },
-    getBillRajal(val) {
+    getBillRajal (val) {
       this.setForm('kdruangan', val.kodepoli)
       const kunjRajal = useKasirRajalListKunjunganStore()
       const param = { noreg: val?.noreg }
@@ -114,15 +114,15 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
         console.log('form', this.form)
       })
     },
-    getBillRanap(val) {
+    getBillRanap (val) {
       this.setForm('kdruangan', val.kdruangan)
       if (!!this.form.dokter && !this.dokters?.length) this.cariDokter(this.form.dokter)
     },
-    getBillIgd(val) {
+    getBillIgd (val) {
       this.setForm('kdruangan', val.kodepoli)
       if (!!this.form.dokter && !this.dokters?.length) this.cariDokter(this.form.dokter)
     },
-    obatSelected(val) {
+    obatSelected (val) {
       this.setForm('kdobat', val)
       const obat = this.obats.filter(a => a.kodeobat === val)
       console.log('obat', obat)
@@ -140,7 +140,7 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
         this.setForm('uraian50', obat[0]?.uraian50 ?? '-')
       }
     },
-    signaSelected(val) {
+    signaSelected (val) {
       this.setForm('aturan', val)
       const signa = this.signas.filter(sig => sig.signa === val)
       if (signa?.length) {
@@ -153,14 +153,14 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
       console.log('signa selected', signa)
       console.log('form', this.form)
     },
-    writeSigna(val) {
+    writeSigna (val) {
       console.log('write signa', val)
       this.setForm('aturan', val)
     },
-    saveSigna(val) {
+    saveSigna (val) {
       console.log('save signa', val)
     },
-    async getSigna() {
+    async getSigna () {
       this.loadingSigna = true
       await api.get('v1/simrs/farmasinew/depo/get-signa')
         .then(resp => {
@@ -170,11 +170,11 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
         })
         .catch(() => { this.loadingSigna = false })
     },
-    clearObat() {
+    clearObat () {
       this.setForm('kdobat', null)
       this.obatTerpilih = null
     },
-    getDataObat(val) {
+    getDataObat (val) {
       this.loadingCari = true
       const params = { params: val }
       return new Promise(resolve => {
@@ -188,7 +188,7 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
           .catch(() => { this.loadingCari = false })
       })
     },
-    cariSimulasi(val) {
+    cariSimulasi (val) {
       this.setForm('kodeincbg', '-')
       this.setForm('uraianinacbg', '-')
       this.setForm('tarifina', 0)
@@ -213,7 +213,7 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
       //     })
       // })
     },
-    cariDokter(val) {
+    cariDokter (val) {
       this.loadingDokter = true
       const params = {
         params: {
@@ -234,7 +234,7 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
           })
       })
     },
-    simpanObat() {
+    simpanObat () {
       this.setForm('kddokter', this.form.dokter)
       this.setForm('nota', this.nota)
       console.log('form', this.form)
@@ -268,7 +268,7 @@ export const useResepDepoFarmasiStore = defineStore('resep_depo_farmasi_setore',
           })
       })
     },
-    openDialog(val) {
+    openDialog (val) {
       Dialog.create({
         title: 'Konfirmasi',
         message: `Obat yang diberikan tgl ${dateFullFormat(val?.cek?.hasil[0]?.tgl)} yang direncakan untuk konsumsi selama ${val?.cek?.total} hari, baru dikonsumsi ${val?.cek?.selisih} hari. Apakah Akan tetal dilanjutkan?`,

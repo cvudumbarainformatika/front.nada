@@ -37,7 +37,7 @@ export const useFarmasiPermintaanMutasiDepoStore = defineStore('farmasi_perminta
       { nama: 'Depo Rawat inap', value: 'Gd-04010102' },
       { nama: 'Depo OK', value: 'Gd-04010103' },
       { nama: 'Depo Rawat Jalan', value: 'Gd-05010101' },
-      { nama: 'Depo IGD', value: 'Gd-02010104' }
+      { nama: 'Depo IGD', value: 'Gd-04010104' }
     ],
     stokDewe: [],
     obats: [],
@@ -45,16 +45,16 @@ export const useFarmasiPermintaanMutasiDepoStore = defineStore('farmasi_perminta
     ]
   }),
   actions: {
-    setForm(key, val) {
+    setForm (key, val) {
       this.form[key] = val
     },
-    setDisp(key, val) {
+    setDisp (key, val) {
       this.disp[key] = val
     },
-    setParam(key, val) {
+    setParam (key, val) {
       this.params[key] = val
     },
-    clearForm() {
+    clearForm () {
       const dari = this.form.dari
       const tujuan = this.form.tujuan
       this.form = {
@@ -66,7 +66,7 @@ export const useFarmasiPermintaanMutasiDepoStore = defineStore('farmasi_perminta
       }
       this.details = []
     },
-    obatSelected(val) {
+    obatSelected (val) {
       this.setForm('kdobat', val)
       this.setForm('jumlah_minta', 0)
       console.log('obat ', val)
@@ -101,14 +101,14 @@ export const useFarmasiPermintaanMutasiDepoStore = defineStore('farmasi_perminta
         notifErrVue('Depo belum dipilih')
       }
     },
-    clearObat() {
+    clearObat () {
       this.setForm('kdobat', null)
       this.setForm('stok_alokasi', 0)
       this.setForm('mak_stok', 0)
       this.setForm('jumlah_minta', 0)
       this.cariObat('')
     },
-    cariObat(val) {
+    cariObat (val) {
       console.log('cari obat ', val)
       this.setParam('nama_obat', val)
       if (this.params.kdgudang) {
@@ -117,14 +117,14 @@ export const useFarmasiPermintaanMutasiDepoStore = defineStore('farmasi_perminta
         notifErrVue('gudang belum dipilih')
       }
     },
-    getInitialData() {
+    getInitialData () {
       // this.getListObat()
     },
-    selesaiDanKunci(val) {
+    selesaiDanKunci (val) {
       this.kunci(this.form.no_permintaan)
     },
 
-    kunci(val) {
+    kunci (val) {
       const data = {
         no_permintaan: val
       }
@@ -143,7 +143,7 @@ export const useFarmasiPermintaanMutasiDepoStore = defineStore('farmasi_perminta
           .catch(() => { this.loadingKunci = false })
       })
     },
-    getListObat() {
+    getListObat () {
       this.loadingObat = true
       const param = { params: this.params }
       return new Promise(resolve => {
@@ -163,7 +163,7 @@ export const useFarmasiPermintaanMutasiDepoStore = defineStore('farmasi_perminta
           })
       })
     },
-    simpan() {
+    simpan () {
       this.loading = true
       return new Promise(resolve => {
         api.post('v1/simrs/farmasinew/depo/simpanpermintaandepo', this.form)
@@ -200,7 +200,7 @@ export const useFarmasiPermintaanMutasiDepoStore = defineStore('farmasi_perminta
           .catch(() => { this.loading = false })
       })
     },
-    simpanMintaMax(val) {
+    simpanMintaMax (val) {
       this.loadingMax = true
       return new Promise(resolve => {
         api.post('v1/simrs/farmasinew/simpanminta', val)

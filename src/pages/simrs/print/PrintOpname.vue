@@ -13,20 +13,9 @@
       <div class="row justify-center text-weight-bold f-16">
         {{ keterangan }} per Tanggal {{ tanggal }}
       </div>
-      <app-table-extend
-        id="printMe"
-        :columns="columns"
-        :items="items"
-        :loading="loading"
-        :default-btn="false"
-        :ada-tambah="false"
-        :ada-filter="false"
-        :ada-paginasi="false"
-        :ada-cari="false"
-        :ada-refresh="false"
-        :ada-per-page="false"
-        row-no
-      >
+      <app-table-extend id="printMe" :columns="columns" :items="items" :loading="loading" :default-btn="false"
+        :ada-tambah="false" :ada-filter="false" :ada-paginasi="false" :ada-cari="false" :ada-refresh="false"
+        :ada-per-page="false" row-no>
         <!-- tanda-tangan -->
         <template #header-for-print>
           <div class="garis-bawah">
@@ -57,23 +46,14 @@
         <template #col-tgl>
           <div>Tanggal Cek Fisik</div>
         </template>
-        <template #cell-status="{row}">
-          <div
-            v-if="row.status<=1"
-            class="text-negative text-weight-bold"
-          >
+        <template #cell-status="{ row }">
+          <div v-if="row.status <= 1" class="text-negative text-weight-bold">
             Belum Diterima gudang
           </div>
-          <div
-            v-if="row.status>=2 && row.sisa_stok > 0"
-            class="text-deep-orange text-weight-bold"
-          >
+          <div v-if="row.status >= 2 && row.sisa_stok > 0" class="text-deep-orange text-weight-bold">
             Sudah di Gudang
           </div>
-          <div
-            v-if="row.status>=2 && row.sisa_stok <= 0"
-            class="text-green"
-          >
+          <div v-if="row.status >= 2 && row.sisa_stok <= 0" class="text-green">
             Sudah di distribusikan
           </div>
         </template>
@@ -94,7 +74,7 @@ const depos = [
   { nama: 'Depo Rawat inap', value: 'Gd-04010102' },
   { nama: 'Depo OK', value: 'Gd-04010103' },
   { nama: 'Depo Rawat Jalan', value: 'Gd-05010101' },
-  { nama: 'Depo IGD', value: 'Gd-02010104' },
+  { nama: 'Depo IGD', value: 'Gd-04010104' },
   { nama: 'Gudang Farmasi ( Kamar Obat )', value: 'Gd-05010100' },
   { nama: 'Gudang Farmasi (Floor Stok)', value: 'Gd-03010100' }
 ]
@@ -193,14 +173,17 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 $fs : 10px;
+
 .app-table {
-  width: 100%; /* print width */
-  font-size:$fs;
+  width: 100%;
+  /* print width */
+  font-size: $fs;
 
   .q-table td {
     padding-left: 10px;
     font-size: $fs;
   }
+
   .q-table th {
     padding-left: 10px;
     font-size: $fs;
@@ -209,31 +192,33 @@ $fs : 10px;
 
 @media print {
   .app-table {
-    width: 100%; /* print width */
-    font-size:$fs;
+    width: 100%;
+    /* print width */
+    font-size: $fs;
 
     .q-table {
-        max-width: 100% !important;
-      }
+      max-width: 100% !important;
+    }
+
     .q-table td {
       padding: 2px;
       font-size: $fs;
-       white-space: normal !important;
-        word-wrap: normal !important;
-        hyphens: manual;
-    }
-    .q-table th {
-      padding:2px;
-      font-size:$fs;
       white-space: normal !important;
-        word-wrap: normal !important;
-        hyphens: manual;
+      word-wrap: normal !important;
+      hyphens: manual;
     }
 
-    .screenwide{
+    .q-table th {
+      padding: 2px;
+      font-size: $fs;
+      white-space: normal !important;
+      word-wrap: normal !important;
+      hyphens: manual;
+    }
+
+    .screenwide {
       max-width: 100% !important;
     }
   }
 }
-
 </style>
