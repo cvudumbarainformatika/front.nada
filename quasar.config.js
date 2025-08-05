@@ -150,14 +150,10 @@ export default defineConfig((ctx) => {
     framework: {
       config: {
         dark: 'auto',  // 'auto' akan mengikuti sistem, atau bisa set langsung ke true
-        // brand: {
-        //   primary: '#6366f1',    // Indigo yang lebih vibrant
-        //   secondary: '#8b5cf6',  // Purple yang menarik
-        //   accent: '#22d3ee',     // Cyan yang eye-catching
-
-        //   dark: '#1e1e2d',       // Dark background yang soft
-        //   'dark-page': '#151521' // Darker background untuk contrast
-        // }
+        brand: {
+          third: '#214738',
+          'dark-page': '#151521' // Darker background untuk contrast
+        }
       },
 
       // iconSet: 'material-icons', // Quasar icon set

@@ -17,7 +17,7 @@
             <KumpulanAplikasi :key="apps.aksesApps" :loading="store.loading" :items="apps.items" :akses="apps.aksesApps"
               :notif-rkd="apps.notifRkd" @go-to="(item) => goTo(item)" />
           </div>
-          <div class="col-auto bg-primary corner">
+          <div class="col-auto bg-dark-page corner">
             <HeaderSso :key="apps.user" :loading="store.loading" :user-local="apps.user" @sign-out="signOut"
               @setting="setting" />
           </div>
