@@ -1,8 +1,5 @@
 <template>
-  <q-card
-    class="full-width"
-    :flat="flat"
-  >
+  <q-card class="fit" :flat="flat">
     <q-card-section v-if="isHeader">
       <div class="f-14 text-weight-bold">
         {{ title }}

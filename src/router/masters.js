@@ -10,6 +10,24 @@ const masters = {
       name: 'master.dashboard',
       component: () => import('pages/simrs/master/IndexPage.vue')
     },
+
+    {
+      path: '/master/simpeg',
+      name: 'master.simpeg',
+      component: () => import('pages/simrs/master/simpeg/IndexPage.vue'),
+      children: [
+        {
+          path: '/master/simpeg/jabatan',
+          name: 'master.simpeg.jabatan',
+          component: () =>
+            import('pages/simrs/master/simpeg/jabatan/IndexPage.vue')
+        }
+      ]
+    },
+
+
+
+
     {
       path: '/master/farmasi',
       name: 'master.farmasi',
