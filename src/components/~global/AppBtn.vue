@@ -1,33 +1,16 @@
 <template>
-  <q-btn
-    unelevated
-    :dense="dense"
-    no-caps
-    :type="props.type"
-    :color="props.color"
-    :class="props.class"
-    :loading="loading"
-    :disable="loading"
-    style="min-width:100px"
-  >
-    <div
-      class="f-12"
-      :class="color===''?'text-primary':''"
-    >
-      {{ label }}
-    </div>
+  <q-btn :dense="dense" :flat="flat" no-caps :type="props.type" :color="props.color" :class="props.class"
+    :loading="loading" :disable="loading" style="min-width:100px" rounded>
+    <slot>
+      <div class="f-12 q-px-sm" :class="color === '' ? 'text-primary' : ''">
+        {{ label }}
+      </div>
+    </slot>
     <template #loading>
-      <q-spinner-hourglass
-        class="on-left"
-        size="18px"
-      />
+      <q-spinner-hourglass class="on-left" size="18px" />
       <span class="f-12"> Loading </span>
     </template>
-    <q-tooltip
-      v-if="tip"
-      class="primary"
-      :offset="[10, 10]"
-    >
+    <q-tooltip v-if="tip" class="primary" :offset="[10, 10]">
       {{ tooltip }}
     </q-tooltip>
   </q-btn>
@@ -75,11 +58,13 @@ const props = defineProps({
   dense: {
     type: Boolean,
     default: false
+  },
+  flat: {
+    type: Boolean,
+    default: false
   }
 
 })
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

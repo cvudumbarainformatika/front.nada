@@ -2,18 +2,20 @@
   <q-input ref="appInputSimrs" :label="label" :dense="type !== 'textarea'" :autogrow="type === 'textarea'" outlined
     standout="bg-yellow-3" :class="`q-mb-xs ${classTambahan}`" :autofocus="autofocus" :readonly="readonly"
     :disable="disable" :type="type" :rules="[requiredRule, minRule, maxRule, emailRule, isNumberRule]"
-    :lazy-rules="lazyRules" :hide-bottom-space="true" :error="errorFromServer?.length > 0"
-    :error-message="errorFromServer?.length ? errorFromServer[0] : null" @update:model-value="updatedModel">
+    :lazy-rules="lazyRules" :hide-bottom-space="true" @update:model-value="updatedModel" bottom-slots :error="!isValid">
     <template v-if="append" #append>
       <q-icon v-if="!appendBtn" :name="appendIcon" size="xs" class="cursor-pointer" v-ripple
         @click="emits('appendClick')" />
       <q-btn v-if="appendBtn" label="cek" outline color="primary" size="sm" v-ripple @click="emits('appendClick')" />
     </template>
+    <template v-if="!isValid" v-slot:error>
+      {{ errorMessage }}
+    </template>
   </q-input>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 // const bg = ref(false)
 const props = defineProps({
   label: {
@@ -71,7 +73,16 @@ const props = defineProps({
   errorFromServer: {
     type: [Array, Object, Boolean],
     default: null
+  },
+  errorMessage: {
+    type: String,
+    default: null
+  },
+  isError: {
+    type: Boolean,
+    default: false
   }
+
 
 })
 
@@ -80,6 +91,14 @@ const emits = defineEmits(['appendClick', 'update:modelValue'])
 const appInputSimrs = ref(null)
 
 defineExpose({ appInputSimrs })
+
+const isValid = computed(() => {
+  if (props.isError) {
+    return false
+  }
+  return true
+})
+
 
 const requiredRule = (val) => {
   if (props.valid === null) {
@@ -137,7 +156,10 @@ const isValidMail = (val) => {
 }
 
 const updatedModel = (e) => {
+  // console.log('updatedModel', e);
+
   emits('update:modelValue', e)
+
 }
 
 </script>

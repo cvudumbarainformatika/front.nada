@@ -43,8 +43,8 @@ export default defineConfig((ctx) => {
       env: {
         // NODE_OPTIONS: '--max-old-space-size=20480',
         API: ctx?.dev
-          // ? 'http://192.168.150.112:3501'
-          ? 'http://103.139.192.183:3501'
+          ? 'http://localhost:8080'
+          // ? 'http://103.139.192.183:3501'
           // : 'http://192.168.150.111:3507',
           : 'http://103.139.192.183:3501',
 
