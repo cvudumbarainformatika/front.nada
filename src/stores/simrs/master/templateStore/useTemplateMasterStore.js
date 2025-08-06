@@ -183,12 +183,12 @@ export function createTemplateMasterStore(storeId, config) {
         // return await api.delete(`${config.baseUrl}/${id}`)
         try {
           this.loadingDelete = true
-          const res = await api.post(`${config.baseUrl}/delete`, { id })
+          const res = await api.post(`${config.baseUrl}/hapus`, { id })
           console.log(`resp ${storeId} delete : `, res);
           if (res.status === 200) {
             this.items = this.items.filter(item => item?.id !== id)
             this.error = null
-            notify({ message: res?.data?.message ?? 'Berhasil menghapus data', type: 'success' })
+            notifSuccess(res)
           }
         } catch (err) {
           console.log(`error ${storeId} delete : `, err);
