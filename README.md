@@ -1,6 +1,6 @@
-# Simrs V3 (simrs-v3)
+# Swastha App (swastha)
 
-Front Simrs V3
+Front Swastha App
 
 ## Install the dependencies
 ```bash

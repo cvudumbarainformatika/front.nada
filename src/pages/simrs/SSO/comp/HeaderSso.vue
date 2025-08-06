@@ -4,7 +4,7 @@
       <div class="row items-center">
         <div v-if="!isMobile">
           <q-avatar size="40px">
-            <img src="~assets/logos/logo-Udumbara.png">
+            <img src="~assets/logos/logo-rsud.png">
           </q-avatar>
         </div>
         <div v-if="!isMobile" class="q-ml-sm text-white">

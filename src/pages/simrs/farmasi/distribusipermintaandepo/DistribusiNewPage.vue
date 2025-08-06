@@ -1,29 +1,14 @@
 <template>
   <div class="q-pa-md bg-white">
-    <div class="row bg-grey q-pa-xs q-my-md">
+    <!-- <div class="row bg-grey q-pa-xs q-my-md">
       <div class="f-16 text-weight-bold">
         Halaman Distribusi Permintaan Depo
       </div>
-    </div>
-    <app-table-extend
-      :columns="store.columns"
-      :items="store.items"
-      :meta="store.meta"
-      :per-page="store.params.per_page"
-      :loading="store.loading"
-      :to-search="store.params.no_permintaan"
-      :click-able="true"
-      :default-btn="false"
-      :ada-tambah="false"
-      :ada-filter="false"
-      :ada-cari="false"
-      row-no
-      text-cari="Cari ..."
-      @find="store.setSearch"
-      @goto="store.setPage"
-      @set-row="store.setPerPage"
-      @refresh="store.refreshTable"
-    >
+    </div> -->
+    <app-table-extend :columns="store.columns" :items="store.items" :meta="store.meta" :per-page="store.params.per_page"
+      :loading="store.loading" :to-search="store.params.no_permintaan" :click-able="true" :default-btn="false"
+      :ada-tambah="false" :ada-filter="false" :ada-cari="false" row-no text-cari="Cari ..." @find="store.setSearch"
+      @goto="store.setPage" @set-row="store.setPerPage" @refresh="store.refreshTable">
       <!-- @edit-data="store.editData" -->
       <!--
             row-image="image"
@@ -37,26 +22,14 @@
               Status :
             </div>
             <div class="q-mr-sm">
-              <q-radio
-                v-model="store.params.jenisdistribusi"
-                checked-icon="icon-mat-task_alt"
-                unchecked-icon="icon-mat-panorama_fish_eye"
-                val="non-konsinyasi"
-                label="Non-Konsinyasi"
-                :disable="store.loading"
-                @update:model-value="store.gantiJenisDistribusi"
-              />
+              <q-radio v-model="store.params.jenisdistribusi" checked-icon="icon-mat-task_alt"
+                unchecked-icon="icon-mat-panorama_fish_eye" val="non-konsinyasi" label="Non-Konsinyasi"
+                :disable="store.loading" @update:model-value="store.gantiJenisDistribusi" />
             </div>
             <div class="q-mr-sm">
-              <q-radio
-                v-model="store.params.jenisdistribusi"
-                checked-icon="icon-mat-task_alt"
-                unchecked-icon="icon-mat-panorama_fish_eye"
-                val="konsinyasi"
-                label="Konsinyasi"
-                :disable="store.loading"
-                @update:model-value="store.gantiJenisDistribusi"
-              />
+              <q-radio v-model="store.params.jenisdistribusi" checked-icon="icon-mat-task_alt"
+                unchecked-icon="icon-mat-panorama_fish_eye" val="konsinyasi" label="Konsinyasi" :disable="store.loading"
+                @update:model-value="store.gantiJenisDistribusi" />
             </div>
           </div>
         </div>
@@ -103,10 +76,7 @@
           <div class="q-mr-xs">
             Fornas
           </div>
-          <div
-            class=" text-weight-bold"
-            :class="row.masterobat.status_fornas === '1' ? 'text-green' : 'text-negative'"
-          >
+          <div class=" text-weight-bold" :class="row.masterobat.status_fornas === '1' ? 'text-green' : 'text-negative'">
             {{ row.masterobat.status_fornas === '1' ? 'Ya' : 'Tidak' }}
           </div>
         </div>
@@ -114,10 +84,7 @@
           <div class="q-mr-xs">
             Forkit
           </div>
-          <div
-            class=" text-weight-bold"
-            :class="row.masterobat.status_forkid === '1' ? 'text-green' : 'text-negative'"
-          >
+          <div class=" text-weight-bold" :class="row.masterobat.status_forkid === '1' ? 'text-green' : 'text-negative'">
             {{ row.masterobat.status_forkid === '1' ? 'Ya' : 'Tidak' }}
           </div>
         </div>
@@ -125,10 +92,8 @@
           <div class="q-mr-xs">
             Generik
           </div>
-          <div
-            class=" text-weight-bold"
-            :class="row.masterobat.status_generik === '1' ? 'text-green' : 'text-negative'"
-          >
+          <div class=" text-weight-bold"
+            :class="row.masterobat.status_generik === '1' ? 'text-green' : 'text-negative'">
             {{ row.masterobat.status_generik === '1' ? 'Ya' : 'Tidak' }}
           </div>
         </div>
@@ -156,7 +121,7 @@
             Permintaan
           </div>
           <div class="q-ml-sm text-weight-bold">
-            {{ row.permintaanobatheder ? dateFullFormat(row.permintaanobatheder.tgl_permintaan):'-' }}
+            {{ row.permintaanobatheder ? dateFullFormat(row.permintaanobatheder.tgl_permintaan) : '-' }}
           </div>
         </div>
         <div class="row justify-between no-wrap">
@@ -164,7 +129,7 @@
             Verif
           </div>
           <div class="q-ml-sm text-weight-bold">
-            {{ row.tgl_verif ? dateFullFormat(row.tgl_verif):'-' }}
+            {{ row.tgl_verif ? dateFullFormat(row.tgl_verif) : '-' }}
           </div>
         </div>
         <div class="row justify-between no-wrap">
@@ -172,7 +137,7 @@
             Distribusi
           </div>
           <div class="q-ml-sm text-weight-bold">
-            {{ row.tgl_distribusi ? dateFullFormat(row.tgl_distribusi):'-' }}
+            {{ row.tgl_distribusi ? dateFullFormat(row.tgl_distribusi) : '-' }}
           </div>
         </div>
       </template>
@@ -190,7 +155,7 @@
             Dari
           </div>
           <div class=" text-weight-bold">
-            {{ row.permintaanobatheder?depo(row.permintaanobatheder.dari) :'-' }}
+            {{ row.permintaanobatheder ? depo(row.permintaanobatheder.dari) : '-' }}
           </div>
         </div>
       </template>
@@ -214,12 +179,8 @@
       </template>
       <template #cell-status="{ row }">
         <div class="row">
-          <q-chip
-            class="f-10"
-            :color="!row.flag_distribusi ? 'green' : 'blue'"
-            :text-color="!row.flag_distribusi ? 'yellow' : 'white'"
-            :label="!row.flag_distribusi ? 'Belum' : 'Sudah'"
-          />
+          <q-chip class="f-10" :color="!row.flag_distribusi ? 'green' : 'blue'"
+            :text-color="!row.flag_distribusi ? 'yellow' : 'white'" :label="!row.flag_distribusi ? 'Belum' : 'Sudah'" />
         </div>
       </template>
       <template #cell-user="{ row }">
@@ -229,31 +190,16 @@
       </template>
       <template #cell-act="{ row }">
         <div v-if="!row.flag_distribusi">
-          <q-btn
-            flat
-            icon="icon-mat-send"
-            dense
-            color="green"
-            :loading="store.loadingKunci && row.no_permintaan === toloadBeli"
-            @click="kunci(row)"
-          >
-            <q-tooltip
-              class="primary"
-              :offset="[10, 10]"
-            >
+          <q-btn flat icon="icon-mat-send" dense color="green"
+            :loading="store.loadingKunci && row.no_permintaan === toloadBeli" @click="kunci(row)">
+            <q-tooltip class="primary" :offset="[10, 10]">
               Distribusikan
             </q-tooltip>
           </q-btn>
         </div>
-        <div
-          v-else
-          class="text-primary text-weight-bold"
-        >
+        <div v-else class="text-primary text-weight-bold">
           Sudah
-          <q-tooltip
-            class="primary"
-            :offset="[10, 10]"
-          >
+          <q-tooltip class="primary" :offset="[10, 10]">
             Sudah Distribusikan
           </q-tooltip>
         </div>
@@ -508,7 +454,7 @@ import { useDistribusiPermintaanDepoStore } from 'src/stores/simrs/farmasi/distr
 import { ref } from 'vue'
 const store = useDistribusiPermintaanDepoStore()
 
-function depo (val) {
+function depo(val) {
   const temp = store.depos.filter(a => a.value === val)
   // console.log('temp', temp)
   if (temp?.length) {
@@ -529,7 +475,7 @@ function depo (val) {
 // }
 
 const toloadBeli = ref('')
-function kunci (val) {
+function kunci(val) {
   toloadBeli.value = val.no_permintaan
   const form = {
     id: val.id,

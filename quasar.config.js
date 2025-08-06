@@ -266,7 +266,7 @@ export default defineConfig((ctx) => {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'simrs-v3'
+        appId: 'swastha'
       }
     },
 

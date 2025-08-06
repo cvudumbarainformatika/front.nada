@@ -3,10 +3,7 @@
     <div class="col-grow br-black">
       <div class="row q-pa-xs">
         <div class="col-auto">
-          <img
-            src="~assets/images/logo-rsud.png"
-            width="80"
-          >
+          <img src="~assets/images/logo-rsud.png" width="80">
         </div>
         <div class="col-grow">
           <div class="text-center">

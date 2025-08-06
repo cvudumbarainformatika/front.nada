@@ -5,7 +5,7 @@
         <div style="height:70px" class="q-px-lg q-py-md row justify-between">
           <div @click="() => router.push({ path: '/admin/sso', replace: true })">
             <q-avatar size="35px" class="cursor-pointer bg-white">
-              <img src="~assets/logos/logo-rsud.png">
+              <img src="~assets/logos/Udumbara.png">
             </q-avatar>
           </div>
           <app-input class="col-10" dense valid label="search" />
