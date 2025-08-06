@@ -21,9 +21,16 @@ const masters = {
           name: 'master.simpeg.jabatan',
           component: () =>
             import('pages/simrs/master/simpeg/jabatan/IndexPage.vue')
+        },
+        {
+          path: '/master/simpeg/pegawai',
+          name: 'master.simpeg.pegawai',
+          component: () =>
+            import('pages/simrs/master/simpeg/pegawai/IndexPage.vue')
         }
       ]
     },
+
 
 
 

@@ -10,30 +10,38 @@ $fs:12;
   .q-field {
       font-size:#{$fs}px;
   }
-  .q-field--dense {
-      .q-field__control, .q-field__marginal {
-          height: #{$fs * 3}px;
-      }
-      .q-field__label {
-          font-size: #{$fs}px;
-          top:#{$fs - 4}px;
-      }
-  }
+
+
+  // .q-field--dense {
+  //     .q-field__control, .q-field__marginal {
+  //         height: #{$fs * 3}px;
+  //     }
+  //     .q-field__label {
+  //         font-size: #{$fs}px;
+  //         top:#{$fs - 4}px;
+  //     }
+  // }
+
+  .q-field--outlined .q-field__control {
+      border-radius: 10px; /* Adjust this value to your desired radius */
+    }
+
   .q-field--labeled.q-field--dense .q-field__native{
-      padding-top: 10px ;
-      padding-bottom: 2px ;
+      padding-top: 0px ;
+      padding-bottom: 0px ;
       font-size: #{$fs}px;
+      border-radius: 15px !important;
   }
 
-  .q-field--dense {
-    .q-field__control, .q-field__marginal {
-        height: #{$fs * 3}px;
-    }
-    .q-field__label {
-        font-size: #{$fs}px;
-        top:#{$fs - 4}px;
-    }
-  }
+  // .q-field--dense {
+  //   .q-field__control, .q-field__marginal {
+  //       height: #{$fs * 3}px;
+  //   }
+  //   .q-field__label {
+  //       font-size: #{$fs}px;
+  //       top:#{$fs - 4}px;
+  //   }
+  // }
 
   // date view
   .q-date--portrait-standard .q-date__header {
@@ -64,6 +72,31 @@ $fs:12;
   .q-field--auto-height.q-field--dense .q-field__control, .q-field--auto-height.q-field--dense .q-field__native {
       min-height: 36px;
   }
+
+
+
+  .input-box .q-field__control,
+  .input-box .q-field__marginal {
+    // height: 75px;
+    // font-size: 20px;
+  }
+
+  .input-box .q-field__label {
+    // font-size: 20px;
+    transform: translateY(0%);
+    transition: all 0.3s ease-out;
+  }
+
+  .input-box.q-field--float .q-field__label {
+    transform: translateX(-8px) translateY(-100%) scale(0.8);
+    background-color: $primary;
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    z-index: 9;
+  }
+
 
   // q-item
   .q-item {

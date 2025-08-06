@@ -1,8 +1,12 @@
 <template>
-  <q-input ref="appInputSimrs" :label="label" :dense="type !== 'textarea'" :autogrow="type === 'textarea'" outlined
-    standout="bg-yellow-3" :class="`q-mb-xs ${classTambahan}`" :autofocus="autofocus" :readonly="readonly"
-    :disable="disable" :type="type" :rules="[requiredRule, minRule, maxRule, emailRule, isNumberRule]"
-    :lazy-rules="lazyRules" :hide-bottom-space="true" @update:model-value="updatedModel" bottom-slots :error="!isValid">
+  <q-input ref="appInputSimrs" borderless :label="label" label-slot :dense="type !== 'textarea'"
+    :autogrow="type === 'textarea'" outlined standout="bg-yellow-3" :class="`q-mb-xs ${classTambahan}`"
+    :autofocus="autofocus" :readonly="readonly" :disable="disable" :type="type"
+    :rules="[requiredRule, minRule, maxRule, emailRule, isNumberRule]" :lazy-rules="lazyRules" :hide-bottom-space="true"
+    @update:model-value="updatedModel" bottom-slots :error="!isValid" class="input-box">
+    <!-- <template v-slot:label>
+      {{ label }}
+    </template> -->
     <template v-if="append" #append>
       <q-icon v-if="!appendBtn" :name="appendIcon" size="xs" class="cursor-pointer" v-ripple
         @click="emits('appendClick')" />
@@ -172,8 +176,4 @@ const updatedModel = (e) => {
 .q-field--error .q-field--highligted {
   background: none;
 }
-
-// .q-field--standout.q-field--highlighted .q-field__control {
-//     box-shadow: 0 1px 5px rgb(0 0 0 / 20%), 0 2px 2px rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%);
-//     background: rgb(250, 173, 173);
-// }</style>
+</style>

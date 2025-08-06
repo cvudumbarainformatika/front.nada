@@ -1,60 +1,22 @@
 <template>
-  <q-input
-    id="ref-input"
-    ref="refInput"
-    dense
-    :filled="!outlined?filled:!filled"
-    :outlined="outlined"
-    :standout="standout?(standoutColor!==null?standoutColor:'bg-yellow-3'):'bg-yellow-3'"
-    :label="label"
-    :placeholder="placeholder"
-    :hide-bottom-space="true"
-    no-error-icon
-    :rules="[anotherValid]"
-    :type="typeInput"
-    :autocomplete="type==='password'?'off':'on'"
-    :error="error"
-    :class="type==='dater'?'cursor-pointer':''"
-    :autofocus="autofocus"
-    :disable="disable"
-    :readonly="readonly"
-    :input-class="currency?'text-right':''"
-    :mask="currency?mask:''"
-    :reverse-fill-mask="currency"
-  >
-    <template
-      v-if="error"
-      #error
-    >
+  <q-input id="ref-input" ref="refInput" dense :filled="!outlined ? filled : !filled" :outlined="outlined"
+    :standout="standout ? (standoutColor !== null ? standoutColor : 'bg-yellow-3') : 'bg-yellow-3'" :label="label"
+    :placeholder="placeholder" :hide-bottom-space="true" no-error-icon :rules="[anotherValid]" :type="typeInput"
+    :autocomplete="type === 'password' ? 'off' : 'on'" :error="error" :class="type === 'dater' ? 'cursor-pointer' : ''"
+    :autofocus="autofocus" :disable="disable" :readonly="readonly" :input-class="currency ? 'text-right' : ''"
+    :mask="currency ? mask : ''" :reverse-fill-mask="currency" class="input-box">
+    <template v-if="error" #error>
       {{ errMessage }}
     </template>
-    <template
-      v-if="icon!==null"
-      #prepend
-    >
-      <q-icon
-        :name="icon"
-        size="18px"
-      />
+    <template v-if="icon !== null" #prepend>
+      <q-icon :name="icon" size="18px" />
     </template>
-    <template
-      v-if="props.type === 'password' || props.rightIcon"
-      #append
-    >
-      <q-icon
-        v-if="props.type === 'password'"
-        :name="typeInput==='password'? 'icon-mat-visibility_off':'icon-mat-visibility'"
-        size="18px"
-        class="cursor-pointer"
-        @click="changeType"
-      />
-      <q-icon
-        v-if="props.rightIcon"
-        :name="props.rightIconName"
-        size="20px"
-        class="cursor-pointer"
-        @click="emits('iconRightClick')"
-      >
+    <template v-if="props.type === 'password' || props.rightIcon" #append>
+      <q-icon v-if="props.type === 'password'"
+        :name="typeInput === 'password' ? 'icon-mat-visibility_off' : 'icon-mat-visibility'" size="18px"
+        class="cursor-pointer" @click="changeType" />
+      <q-icon v-if="props.rightIcon" :name="props.rightIconName" size="20px" class="cursor-pointer"
+        @click="emits('iconRightClick')">
         <q-tooltip>
           {{ rightIconTooltip }}
         </q-tooltip>
@@ -124,7 +86,7 @@ onMounted(() => {
   // console.log(refInput.value)
 })
 
-function anotherValid (val) {
+function anotherValid(val) {
   if (props.valid) {
     return true
   }
@@ -135,7 +97,7 @@ function anotherValid (val) {
   return (!!val) || props.defErr
 }
 
-function changeType () {
+function changeType() {
   let type = typeInput.value
   if (type === 'text') {
     type = 'password'
@@ -150,15 +112,15 @@ function changeType () {
 
 <style lang="scss" scoped>
 .q-field--dense .q-field__bottom {
-    display:none;
+  display: none;
 }
 
 .q-field--error .q-field--highligted {
   background: none;
 }
-.q-field--standout.q-field--highlighted .q-field__control {
-    box-shadow: 0 1px 5px rgb(0 0 0 / 20%), 0 2px 2px rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%);
-    background: rgb(250, 173, 173);
-}
 
+.q-field--standout.q-field--highlighted .q-field__control {
+  box-shadow: 0 1px 5px rgb(0 0 0 / 20%), 0 2px 2px rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%);
+  background: rgb(250, 173, 173);
+}
 </style>

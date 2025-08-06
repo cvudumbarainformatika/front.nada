@@ -1,5 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
+import { notifSuccess } from 'src/modules/utils'
 
 export function createTemplateMasterStore(storeId, config) {
   return defineStore(storeId, {
@@ -140,6 +141,7 @@ export function createTemplateMasterStore(storeId, config) {
             this.error = null
             this.modalFormOpen = false
             this.mode = 'add'
+            notifSuccess(res)
           }
 
 
@@ -177,24 +179,24 @@ export function createTemplateMasterStore(storeId, config) {
       //     this.loadingSave = false
       //   }
       // },
-      // async remove(id) {
-      //   // return await api.delete(`${config.baseUrl}/${id}`)
-      //   try {
-      //     this.loadingDelete = true
-      //     const res = await api.post(`${config.baseUrl}/delete`, { id })
-      //     console.log(`resp ${storeId} delete : `, res);
-      //     if (res.status === 200) {
-      //       this.items = this.items.filter(item => item.id !== id)
-      //       this.error = null
-      //       notify({ message: res.data.message ?? 'Berhasil menghapus data', type: 'success' })
-      //     }
-      //   } catch (err) {
-      //     console.log(`error ${storeId} delete : `, err);
-      //     this.error = err
-      //   } finally {
-      //     this.loadingDelete = false
-      //   }
-      // },
+      async remove(id) {
+        // return await api.delete(`${config.baseUrl}/${id}`)
+        try {
+          this.loadingDelete = true
+          const res = await api.post(`${config.baseUrl}/delete`, { id })
+          console.log(`resp ${storeId} delete : `, res);
+          if (res.status === 200) {
+            this.items = this.items.filter(item => item?.id !== id)
+            this.error = null
+            notify({ message: res?.data?.message ?? 'Berhasil menghapus data', type: 'success' })
+          }
+        } catch (err) {
+          console.log(`error ${storeId} delete : `, err);
+          this.error = err
+        } finally {
+          this.loadingDelete = false
+        }
+      },
       // setPage(page) {
       //   this.page = page
       //   this.fetchAll()
@@ -210,6 +212,12 @@ export function createTemplateMasterStore(storeId, config) {
         this.item = item
         this.modalFormOpen = true
         this.mode = 'edit'
+      },
+      setAdd() {
+        this.mode = 'add'
+        this.error = null
+        this.item = null
+        this.modalFormOpen = true
       },
 
       setPage(page) {
