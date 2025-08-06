@@ -11,7 +11,7 @@
 
       <!-- FORM -->
 
-      <q-form class="col full-height column" @submit="handleSubmit">
+      <q-form class="col full-height column" @submit="handleSubmit" @reset="handleReset">
         <q-card-section class="col full-height scroll" :class="dark ? 'bg-dark' : 'bg-grey-3'">
 
           <div class="row q-py-lg">
@@ -21,7 +21,7 @@
         </q-card-section>
         <q-card-actions align="right" class="col-auto">
 
-          <app-btn label="Cancel" flat v-close-popup />
+          <app-btn label="Cancel" flat type="reset" />
           <app-btn label="Simpan Data" :loading="store.loadingSave" color="primary" type="submit" />
         </q-card-actions>
       </q-form>
@@ -71,18 +71,39 @@ watch(() => (form.value), (newForm, oldForm) => {
   // console.log('🔥 watch form', newForm, oldForm);
 
   for (const key in newForm) {
-    console.log('🔥 watch form', key);
-    // if (newForm[key] !== oldForm[key]) {
-
     props.store.clearFieldError(key)
-    // }
   }
+
+}, { deep: true })
+
+watch(() => (props.store.item), (newForm, oldForm) => {
+  // console.log('🔥 watch form', newForm, oldForm);
+  const excludedKeys = ['created_at', 'updated_at']
+
+  if (newForm) {
+    form.value = Object.fromEntries(
+      Object.entries(newForm).filter(([key]) => !excludedKeys.includes(key))
+    )
+  }
+
+  console.log('🔥 watch form', form.value);
+
 
 }, { deep: true })
 
 
 const handleSubmit = () => {
   props.store.create(form.value)
+}
+
+const handleReset = () => {
+  form.value = {
+    jabatan: null
+  }
+
+  props.store.clearAllError()
+  props.store.setEdit(null)
+  props.store.modalFormOpen = false
 }
 
 

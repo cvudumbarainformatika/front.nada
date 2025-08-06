@@ -9,15 +9,15 @@
         <div class="flex items-center justify-end q-mr-md">
           <q-btn :disable="meta.current_page === 1" flat round color="primary" icon="icon-mat-skip_previous" size="sm"
             @click="emits('first')" />
-          <q-btn :disable="(!meta?.prev_page_url)" flat round color="primary" icon="icon-mat-chevron_left" size="md"
+          <q-btn :disable="(!meta?.prev)" flat round color="primary" icon="icon-mat-chevron_left" size="sm"
             @click="emits('prev')" />
           <div class="bold q-pa-xs">
             {{ meta.current_page }} {{ meta.last_page ? `/ ${meta.last_page}` : '' }}
           </div>
-          <q-btn :disable="(!meta.next_page_url)" flat round color="primary" icon="icon-mat-chevron_right" size="md"
+          <q-btn :disable="(!meta.next)" flat round color="primary" icon="icon-mat-chevron_right" size="sm"
             @click="emits('next')" />
           <q-btn :disable="meta.current_page === meta.last_page" flat round color="primary" icon="icon-mat-skip_next"
-            size="md" @click="emits('last')" />
+            size="sm" @click="emits('last')" />
         </div>
       </div>
     </div>

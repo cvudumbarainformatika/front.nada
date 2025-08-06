@@ -1,6 +1,6 @@
 <template>
   <div class="app-table f-12 full-height full-width column">
-    <div class="col-auto q-px-md q-pt-md">
+    <div class="col-auto q-px-sm q-pt-md">
       <div class="print-only">
         <slot name="header-for-print" />
       </div>
@@ -8,7 +8,7 @@
         <div class="col-one flex items-center">
           <div>
             <q-input v-model="store.params.q" outlined class="search-big" borderless rounded :debounce="debounce"
-              clearable dense :placeholder="labelSearch" @keydown.enter.prevent="handleSearch">
+              clearable dense :placeholder="labelSearch" @keydown.enter.prevent="handleSearch" @clear="handleSearch">
               <template #prepend>
                 <q-icon name="icon-mat-search" size="20px" />
               </template>
@@ -213,21 +213,22 @@
 
       </q-markup-table>
     </div>
-    <!-- <div class="print-only">
+    <div class="print-only">
       <slot name="footer-for-print" />
-    </div> -->
+    </div>
     <!-- Pagination -->
-    <!-- <AppPaginationTable v-if="(items?.length > 0 || (!items?.length && forcePaginasi)) && adaPaginasi"
-      class="print-hide" :meta="meta" @first="emits('goto', 1)" @last="emits('goto', meta.last_page)"
-      @next="emits('goto', meta.current_page + 1)" @prev="emits('goto', meta.current_page - 1)" /> -->
+    <PaginateTable v-if="(items?.length > 0) && adaPaginasi" class="print-hide" :meta="meta" @first="goTo(1)"
+      @last="goTo(meta?.last_page)" @next="goTo(meta?.current_page + 1)" @prev="goTo(meta?.current_page - 1)" />
   </div>
 </template>
 
 <script setup>
 import { ref, watch, computed, onMounted } from 'vue'
+import PaginateTable from './PaginateTable.vue'
 
 const props = defineProps({
   store: { type: Object, required: true },
+  meta: { type: Object, default: null },
   labelSearch: { type: String, default: 'Cari ... Enter' },
   debounce: { type: Number, default: 300 },
   dark: { type: Boolean, default: false },
@@ -250,6 +251,10 @@ const props = defineProps({
   clickAble: { type: Boolean, default: false },
   adaEdit: { type: Boolean, default: true },
   adaDelete: { type: Boolean, default: true },
+
+  // pagination
+  adaPaginasi: { type: Boolean, default: true },
+  forcePaginasi: { type: Boolean, default: false },
 
 
 })
@@ -289,7 +294,8 @@ const handleRefresh = () => {
 }
 
 const handleEdit = (item) => {
-  // emits('edit', item)
+  // console.log('edit', item);
+  props.store.setEdit(item)
 }
 
 const deleteOne = (id) => {
@@ -341,7 +347,9 @@ const setCheck = (x) => {
   }
 }
 
-
+const goTo = (page) => {
+  props.store.setPage(page)
+}
 </script>
 
 <style lang="scss" scoped>

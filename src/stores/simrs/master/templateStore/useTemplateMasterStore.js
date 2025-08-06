@@ -131,16 +131,15 @@ export function createTemplateMasterStore(storeId, config) {
             if (this.mode === 'add') {
               this.items.unshift(result)
             } else {
-              this.items = this.items.map((item) => {
-                if (item.id === result.id) {
-                  return result
-                }
-                return item
-              })
+              const index = this.items?.findIndex(item => item.id === result.id)
+              if (index !== -1) {
+                this.items[index] = { ...this.items[index], ...result }
+              }
             }
 
             this.error = null
             this.modalFormOpen = false
+            this.mode = 'add'
           }
 
 
@@ -206,11 +205,28 @@ export function createTemplateMasterStore(storeId, config) {
         this.fetchAll()
       },
 
+      setEdit(item) {
+        this.error = null
+        this.item = item
+        this.modalFormOpen = true
+        this.mode = 'edit'
+      },
+
+      setPage(page) {
+        this.params.page = page
+        this.fetchAll()
+      },
+
       clearFieldError(field) {
         if (this.error?.response?.data?.errors?.[field]) {
           delete this.error.response.data.errors[field]
         }
       },
+
+      clearAllError() {
+        this.error = null
+      },
+
       // reset() {
       //   this.item = null
       //   this.error = null

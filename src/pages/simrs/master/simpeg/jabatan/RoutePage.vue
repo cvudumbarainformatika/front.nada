@@ -1,7 +1,7 @@
 <template>
   <q-page class="fit relative-position">
     <div class="fit absolute-top q-pa-sm">
-      <q-card class="rounded-lg fit column">
+      <q-card class="rounded-lg fit column" style="border-radius: 10px;">
 
 
 
@@ -10,7 +10,11 @@
             :columns="store.columns" :column-hide="store.columnHide" :items="store.items" :meta="store.meta"
             :dark="dark">
 
-
+            <template v-slot:col-kode_jabatan="{ row, left, right }">
+              <div :class="left">
+                KODE
+              </div>
+            </template>
 
           </DataTable>
         </q-card-section>
