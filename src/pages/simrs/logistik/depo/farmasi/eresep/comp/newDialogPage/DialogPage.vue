@@ -143,13 +143,13 @@
       </q-btn>
     </div>
     <div
-      v-if="store?.resep?.flag === '2' && ((store?.resep?.tiperesep === 'iter' ? store?.resep?.noresep_asal === '' : true) ? store?.resep?.semuaresep && store?.resep?.semuaracik : true)"
+      v-if="store?.resep?.flag === '2' && ((store?.resep?.tiperesep === 'iter' ? store?.resep?.noresep_asal === '' : true))"
       class="text-right q-mr-md q-my-sm">
-      <q-btn rounded push label="Selesai" class="f-12 q-mr-sm" color="green" text-color="white" icon="icon-mat-done_all"
-        :disable="store.loadingSelesai && store?.resep?.loading"
+      <q-btn rounded push label="Simpan dan Selesai" class="f-12 q-mr-sm" color="green" text-color="white"
+        icon="icon-mat-done_all" :disable="store.loadingSelesai && store?.resep?.loading"
         :loading="store.loadingSelesai && store?.resep?.loading" @click="store.resepSelesai(store?.resep)">
         <q-tooltip class="primary" :offset="[10, 10]">
-          Selesai
+          Simpan dan Selesai
         </q-tooltip>
       </q-btn>
     </div>
@@ -382,18 +382,29 @@
 
                     <div
                       v-if="parseInt(store?.resep?.flag) == '2' && (store?.resep?.tiperesep === 'iter' ? store?.resep?.noresep_asal === '' : true)">
-                      <q-btn v-if="(!rinc?.obatkeluar) && !rinc?.done && parseInt(store?.resep?.flag) < 5" round
+                      <!-- <q-btn v-if="(!rinc?.obatkeluar) && !rinc?.done && parseInt(store?.resep?.flag) < 5" round
                         class="f-10 q-my-sm" color="primary" text-color="white" icon="icon-mat-save"
                         :loading="rinc?.loading" :disable="rinc?.loading" @click="store.simpanObat(rinc)">
                         <q-tooltip class="primary" :offset="[10, 10]">
                           Simpan Obat
                         </q-tooltip>
-                      </q-btn>
+                      </q-btn> -->
                     </div>
                     <div v-if="rinc?.obatkeluar >= 0">
                       Sudah dikeluarkan obat sebanyak {{ rinc?.obatkeluar }} ({{ rinc?.mobat?.satuan_k }})
                     </div>
                   </div>
+                </div>
+                <div v-if="pembatasan(rinc)" class="row items-center full-width q-pa-xs bg-red-3 text-black">
+                  {{ pembatasan(rinc) }}
+                </div>
+                <div v-if="sisaObat(rinc)" class="row items-center full-width bg-red-2 text-black q-pa-xs">
+                  {{ sisaObat(rinc) }}
+                </div>
+                <div v-if="cekAlokasi(rinc) >= 0 && store.resep?.alokasi?.length > 0"
+                  class="row items-center full-width text-black q-pa-xs"
+                  :class="cekAlokasi(rinc) < rinc?.jumlah ? 'bg-red-3' : 'bg-green-2'">
+                  Jumlah Alokasi : {{ cekAlokasi(rinc) }}
                 </div>
               </q-item-section>
             </q-item>
@@ -586,18 +597,26 @@
                       </div> -->
                       <div
                         v-if="parseInt(store?.resep?.flag) == 2 && (store?.resep?.tiperesep === 'iter' ? store?.resep?.noresep_asal === '' : true)">
-                        <q-btn v-if="(!rinc?.obatkeluar) && !rinc?.done && parseInt(store?.resep?.flag) < 3" round
+                        <!-- <q-btn v-if="(!rinc?.obatkeluar) && !rinc?.done && parseInt(store?.resep?.flag) < 3" round
                           class="f-10 q-mr-sm" color="primary" text-color="white" icon="icon-mat-save"
                           :loading="rinc?.loading" :disable="rinc?.loading" @click="store.simpanRacikan(rinc)">
                           <q-tooltip class="primary" :offset="[10, 10]">
                             Simpan Obat
                           </q-tooltip>
-                        </q-btn>
+                        </q-btn> -->
                       </div>
                       <div v-if="rinc?.obatkeluar >= 0">
                         Sudah dikeluarkan obat sebanyak {{ rinc?.obatkeluar }} ({{ rinc?.mobat?.satuan_k }})
                       </div>
+                      <div v-if="store?.resep?.pembatasanRac?.length > 0">
+                        {{ pembatasanRac(rinc) }}
+                      </div>
                     </div>
+                  </div>
+                  <div v-if="cekAlokasiRac(rinc) >= 0 && store.resep?.alokasiRac?.length > 0"
+                    class="row items-center full-width text-black q-pa-xs"
+                    :class="cekAlokasiRac(rinc) < rinc?.jumlahobat ? 'bg-red-3' : 'bg-green-2'">
+                    Jumlah Alokasi : {{ cekAlokasiRac(rinc) }}
                   </div>
                 </q-item-section>
               </q-item>
@@ -936,16 +955,16 @@
                             </div>
                           </div>
                           <div v-if="parseInt(store?.resep?.flag) >= 2">
-                            <q-btn v-if="!rinc?.obatkeluar && parseInt(store?.resep?.flag) < 3" round
+                            <!-- <q-btn v-if="!rinc?.obatkeluar && parseInt(store?.resep?.flag) < 3" round
                               class="f-10 q-mr-sm" color="primary" text-color="white" icon="icon-mat-save"
                               :loading="rinc?.loading" :disable="rinc?.loading" @click="store.simpanRacikan(rinc)">
                               <q-tooltip class="primary" :offset="[10, 10]">
                                 Simpan Obat
                               </q-tooltip>
-                            </q-btn>
-                            <!-- <div v-if="rinc?.obatkeluar">
+                            </q-btn> -->
+                            <div v-if="rinc?.obatkeluar">
                               Sudah dikeluarkan obat sebanyak {{ rinc?.obatkeluar }} ({{ rinc?.mobat?.satuan_k }})
-                            </div> -->
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1004,12 +1023,12 @@ const openHistory = ref(false)
 
 const openIter = ref(false)
 
-const SudahAdaCopy = defineAsyncComponent(() => import('./SudahAdaCopy.vue'))
-const HistoryResepIter = defineAsyncComponent(() => import('./HistoryResepIter.vue'))
-const EtiketRajal = defineAsyncComponent(() => import('./EtiketRajal.vue'))
-const EtiketRanap = defineAsyncComponent(() => import('./EtiketRanap.vue'))
+const SudahAdaCopy = defineAsyncComponent(() => import('..//SudahAdaCopy.vue'))
+const HistoryResepIter = defineAsyncComponent(() => import('..//HistoryResepIter.vue'))
+const EtiketRajal = defineAsyncComponent(() => import('..//EtiketRajal.vue'))
+const EtiketRanap = defineAsyncComponent(() => import('..//EtiketRanap.vue'))
 const historyPage = defineAsyncComponent(() => import('src/pages/simrs/poli/tindakan/complayout/RightDrawer.vue'))
-const HistoryLabPage = defineAsyncComponent(() => import('./HistoryLabPage.vue'))
+const HistoryLabPage = defineAsyncComponent(() => import('..//HistoryLabPage.vue'))
 
 function openRajal (val) {
   // console.log('refEtiketRajal', refEtiketRajal.value)
@@ -1019,6 +1038,39 @@ function openRajal (val) {
   setTimeout(() => {
     refEtiketRajal.value.printPage()
   }, 200)
+}
+function cekAlokasiRac (val) {
+  const cekAlokasi = store.resep?.alokasiRac?.find(p => p?.kdobat === val?.kdobat)
+  // console.log('cekAlokasi', cekAlokasi, val, store.resep)
+  if (cekAlokasi) return (cekAlokasi?.alokasi)
+  else return null
+
+}
+function cekAlokasi (val) {
+  const cekAlokasi = store.resep?.alokasi?.find(p => p?.kdobat === val?.kdobat)
+  // console.log('cekAlokasi', cekAlokasi, val, store.resep)
+  if (cekAlokasi) return (cekAlokasi?.alokasi)
+  else return null
+
+}
+function sisaObat (val) {
+  const sisaObat = store.resep?.sisaObat?.find(p => p?.kdobat === val?.kdobat)
+  // console.log('sisaObat', sisaObat, val, store.resep)
+  if (sisaObat?.status == 1) return 'konsumsi obat baru ' + (sisaObat?.selisih) + ' hari dari  ' + sisaObat?.total + ' hari'
+  else return null
+
+}
+function pembatasan (val) {
+  const pembatasan = store.resep?.pembatasan?.find(p => p?.kd_obat === val?.kdobat)
+  // console.log('pembatasan', pembatasan, val, store.resep)
+  if (pembatasan) return 'sudah keluar obat sebanyak ' + (pembatasan?.obat_keluar) + ' dan ada pembatasan obat sejumlah ' + pembatasan?.jumlah
+  else return null
+}
+function pembatasanRac (val) {
+  const pembatasan = store.resep?.pembatasanRac?.find(p => p?.kd_obat === val?.kdobat)
+  // console.log('pembatasan', pembatasan, val, store.resep)
+  if (pembatasan) return 'sudah keluar obat sebanyak ' + (pembatasan?.obat_keluar) + ' dan ada pembatasan obat sejumlah ' + pembatasan?.jumlah
+  else return null
 }
 function setRincRanap (val, evt) {
   // console.log('set rinc ranap', val, evt)
