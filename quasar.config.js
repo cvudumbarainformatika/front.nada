@@ -142,7 +142,16 @@ export default defineConfig((ctx) => {
       port: ctx.mode.spa
         ? 9001
         : (ctx.mode.pwa ? 9100 : 9200),
-      open: true // opens browser window automatically
+      open: true, // opens browser window automatically
+
+
+      proxy: {
+        '/bpom': {
+          target: 'http://103.139.192.183:3000',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/bpom/, ''),
+        }
+      }
 
     },
 

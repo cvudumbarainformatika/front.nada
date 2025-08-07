@@ -11,3 +11,9 @@ export const useMasterPegawaiStore = createTemplateMasterStore('pegawai', {
   // ini isi column table (untuk pertama kali), 
   persist: false
 })
+
+export const useMasterObatStore = createTemplateMasterStore('obat', {
+  baseUrl: '/v1/simrs/master/farmasi',
+  columns: ['kode', 'nama'], // ini isi column table (untuk pertama kali)
+  persist: false
+})

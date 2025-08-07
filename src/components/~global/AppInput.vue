@@ -4,7 +4,7 @@
     :placeholder="placeholder" :hide-bottom-space="true" no-error-icon :rules="[anotherValid]" :type="typeInput"
     :autocomplete="type === 'password' ? 'off' : 'on'" :error="error" :class="type === 'dater' ? 'cursor-pointer' : ''"
     :autofocus="autofocus" :disable="disable" :readonly="readonly" :input-class="currency ? 'text-right' : ''"
-    :mask="currency ? mask : ''" :reverse-fill-mask="currency" class="input-box">
+    :mask="currency ? mask : ''" :reverse-fill-mask="currency" class="input-box" :bgColor="hasValue ? 'yellow-1' : ''">
     <template v-if="error" #error>
       {{ errMessage }}
     </template>
@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watchEffect } from 'vue'
 // const emits = defineEmits(['showDate'])
 const props = defineProps({
   icon: {
@@ -77,6 +77,9 @@ const props = defineProps({
 })
 
 const refInput = ref(null)
+const hasValue = ref(false)
+
+
 defineExpose({ refInput })
 const emits = defineEmits(['iconRightClick'])
 
@@ -84,6 +87,15 @@ const typeInput = ref(props.type)
 
 onMounted(() => {
   // console.log(refInput.value)
+})
+
+watchEffect(() => {
+  const el = refInput.value?.modelValue
+  if (el?.length > 0) {
+    hasValue.value = true
+  } else {
+    hasValue.value = false
+  }
 })
 
 function anotherValid(val) {

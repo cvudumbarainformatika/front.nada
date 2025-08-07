@@ -13,13 +13,7 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 
-// INI YANG LAMA
-// const AsyncComp = defineAsyncComponent(() =>
-//   import('./TabelObat.vue')
-// )
-
-// INI YANG BARU
 const AsyncComp = defineAsyncComponent(() =>
-  import('./BARU/RoutePage.vue')
+  import('./RoutePage.vue')
 )
 </script>

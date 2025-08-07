@@ -1,65 +1,27 @@
 <template>
-  <q-select
-    ref="refAuto"
-    use-input
-    dense
-    :options="optionx"
-    :label="label"
-    :filled="!outlined ? filled : !filled"
-    :outlined="outlined"
-    hide-bottom-space
-    no-error-icon
-    hide-dropdown-icon
-    :option-label="typeof optionLabel === 'object' ? optionLabel[0]: optionLabel"
-    :option-value="optionValue"
-    :disable="disable"
-    :model-value="modelProp"
-    :loading="loading"
-    :input-debounce="debounce"
-    lazy-rules
-    :rules="[anotherValid]"
-    behavior="menu"
-    map-options
-    emit-value
-    transition-show="scale"
-    transition-hide="scale"
-    @update:model-value="selected"
-    @filter="filterFn"
-    @new-value="createValue"
-    @input-value="inputValue"
-    @clear="bersihkan"
-  >
-    <template
-      v-if="modelProp"
-      #append
-    >
-      <q-icon
-        name="icon-mat-cancel"
-        class="cursor-pointer"
-        @click.stop.prevent="bersihkan"
-      />
+  <q-select ref="refAuto" use-input hide-selected fill-input dense :options="optionx" :label="label"
+    :filled="!outlined ? filled : !filled" :outlined="outlined" hide-bottom-space no-error-icon hide-dropdown-icon
+    :option-label="typeof optionLabel === 'object' ? optionLabel[0] : optionLabel" :option-value="optionValue"
+    :disable="disable" :model-value="modelProp" :loading="loading" :input-debounce="debounce" lazy-rules
+    :rules="[anotherValid]" behavior="menu" map-options emit-value transition-show="scale" transition-hide="scale"
+    @update:model-value="selected" @filter="filterFn" @new-value="createValue" @input-value="inputValue"
+    @clear="bersihkan" class="input-box" :bgColor="hasValue ? 'yellow-1' : ''">
+    <template v-if="modelProp" #append>
+      <q-icon name="icon-mat-cancel" class="cursor-pointer" @click.stop.prevent="bersihkan" />
     </template>
     <template #option="scope">
       <q-item v-bind="scope.itemProps">
         <q-item-section>
-          <div v-if="typeof(props.optionLabel)==='object'">
-            <div
-              v-for="(item, i) in props.optionLabel"
-              :key="i"
-            >
+          <div v-if="typeof (props.optionLabel) === 'object'">
+            <div v-for="(item, i) in props.optionLabel" :key="i">
               <q-item-label>
-                <div
-                  class="ellipsis"
-                >
+                <div class="ellipsis">
                   {{ scope.opt[item] }}
                 </div>
               </q-item-label>
             </div>
           </div>
-          <div
-            v-if="typeof(props.optionLabel)==='string'"
-            class="ellipsis"
-          >
+          <div v-if="typeof (props.optionLabel) === 'string'" class="ellipsis">
             {{ scope.opt[optionLabel] }}
           </div>
         </q-item-section>
@@ -67,18 +29,15 @@
     </template>
     <template #no-option>
       <q-item>
-        <q-item-section
-          class="text-grey cursor-pointer"
-          @click="emits('newOption')"
-        >
+        <q-item-section class="text-grey cursor-pointer" @click="emits('newOption')">
           {{ noOption }}
         </q-item-section>
       </q-item>
     </template>
     <template #selected-item="scope">
-      <div v-if="typeof(props.optionLabel)==='object'">
+      <div v-if="typeof (props.optionLabel) === 'object'">
         <div class="ellipsis">
-          {{ scope.opt?scope.opt[optionLabel[0]]:'' }}
+          {{ scope.opt ? scope.opt[optionLabel[0]] : '' }}
         </div>
       </div>
       <div v-else>
@@ -91,7 +50,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, watchEffect, onMounted } from 'vue'
 const emits = defineEmits(['on-enter', 'getSource', 'set-model', 'buang', 'on-select', 'clear', 'new-val', 'cari', 'newOption'])
 const props = defineProps({
   source: { type: Array, default: () => [] },
@@ -112,7 +71,10 @@ const props = defineProps({
 const optionx = ref([])
 const refAuto = ref(null)
 const diModel = ref(null)
-function fetchData () {
+
+const hasValue = ref(false)
+
+function fetchData() {
   // console.log(refAuto.value)
   if (props.source?.length > 0) {
     optionx.value = props.source
@@ -120,9 +82,25 @@ function fetchData () {
 }
 
 const modelProp = computed({
-  get () { return props.model },
-  set (val) { emits('set-model', val) }
+  get() { return props.model },
+  set(val) { emits('set-model', val) }
 })
+
+
+onMounted(() => {
+  // console.log('mounted', refAuto.value);
+
+})
+
+watchEffect(() => {
+  const el = refAuto.value?.modelValue
+  if (el?.length > 0) {
+    hasValue.value = true
+  } else {
+    hasValue.value = false
+  }
+})
+
 
 // const oLabel = computed(() => {
 //   const balik = props.optionLabel.forEach(data => {
@@ -141,7 +119,7 @@ const selected = (val) => {
   emits('on-select', val)
 }
 fetchData()
-function filterFn (val, update) {
+function filterFn(val, update) {
   // console.log('filterFn ', val)
   if (val === '') {
     update(() => {
@@ -199,7 +177,7 @@ function filterFn (val, update) {
 //   }
 // }
 // debounce function
-function myDebounce (func, timeout = 800) {
+function myDebounce(func, timeout = 800) {
   let timer
   return (...arg) => {
     clearTimeout(timer)
@@ -212,7 +190,7 @@ const inputValue = myDebounce((val) => {
 // const inputValue = (value) => {
 //   emits('buang', value)
 // }
-function createValue (val, done) {
+function createValue(val, done) {
   const result = new Promise((resolve) => emits('on-enter', val, resolve))
   emits('new-val', val)
 
@@ -221,7 +199,7 @@ function createValue (val, done) {
     done(resp, 'toggle')
   })
 }
-function anotherValid (val) {
+function anotherValid(val) {
   if (props.valid) {
     return true
   }
@@ -233,6 +211,4 @@ watch(() => props.source, (obj) => {
 })
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -3,7 +3,8 @@
     :autogrow="type === 'textarea'" outlined standout="bg-yellow-3" :class="`q-mb-xs ${classTambahan}`"
     :autofocus="autofocus" :readonly="readonly" :disable="disable" :type="type"
     :rules="[requiredRule, minRule, maxRule, emailRule, isNumberRule]" :lazy-rules="lazyRules" :hide-bottom-space="true"
-    @update:model-value="updatedModel" bottom-slots :error="!isValid" class="input-box">
+    @update:model-value="updatedModel" bottom-slots :error="!isValid" class="input-box"
+    :bgColor="hasValue ? 'yellow-1' : ''">
     <!-- <template v-slot:label>
       {{ label }}
     </template> -->
@@ -19,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch, watchEffect } from 'vue'
 // const bg = ref(false)
 const props = defineProps({
   label: {
@@ -85,7 +86,8 @@ const props = defineProps({
   isError: {
     type: Boolean,
     default: false
-  }
+  },
+
 
 
 })
@@ -94,7 +96,30 @@ const emits = defineEmits(['appendClick', 'update:modelValue'])
 
 const appInputSimrs = ref(null)
 
+const hasValue = ref(false)
+
 defineExpose({ appInputSimrs })
+
+
+onMounted(() => {
+  // console.log('ref', appInputSimrs.value);
+})
+
+watchEffect(() => {
+  const el = appInputSimrs.value?.modelValue
+  // console.log('el', el);
+
+  if (el?.length > 0) {
+    hasValue.value = true
+  } else {
+    hasValue.value = false
+  }
+
+
+})
+
+
+
 
 const isValid = computed(() => {
   if (props.isError) {
@@ -102,6 +127,8 @@ const isValid = computed(() => {
   }
   return true
 })
+
+
 
 
 const requiredRule = (val) => {
