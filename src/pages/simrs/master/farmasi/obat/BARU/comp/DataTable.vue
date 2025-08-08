@@ -93,8 +93,9 @@
 
     <!-- table -->
     <div class="col full-height full-width">
-      <q-markup-table ref="refCellTable" flat bordered class="rounded-xl shadow-sm full-height relative-position head-x"
-        :dense="$q.screen.lt.md" :class="[dark ? 'bg-dark' : 'bg-white']">
+      <q-markup-table ref="refCellTable" flat bordered
+        class="rounded-xl shadow-sm full-height relative-position head-x column-x" :dense="$q.screen.lt.md"
+        :class="[dark ? 'bg-dark' : 'bg-white']">
 
         <thead class="" :class="dark ? 'bg-black' : 'bg-grey-4'">
           <tr :class="dark ? 'bg-black' : 'bg-grey-4'">
@@ -118,7 +119,7 @@
               <div class="row items-center text-weight-bold">
                 <slot :name="'col-' + head" :row="head" :left="'col-grow text-left'" :right="'col-grow text-right'">
                   <div class="col-grow text-left">
-                    {{ head?.toUpperCase() }}
+                    {{ ubahSpace(head)?.toUpperCase() }}
                   </div>
                 </slot>
                 <div v-if="orderBy === head">
@@ -289,6 +290,11 @@ const filterColumn = computed(() => {
   return cols
 })
 
+function ubahSpace(text) {
+  return text.replace(/_/g, ' ')
+
+}
+
 
 const handleSearch = () => {
   // console.log('search');
@@ -383,25 +389,6 @@ const goTo = (page) => {
 $fs : v-bind(ts);
 $pfs: v-bind(pts);
 
-// @mixin width-full($full: true) {
-//   @if $full {
-//     max-width: 100% !important;
-//   }
-// }
-
-// @mixin wrap($full: true) {
-//   @if $full {
-//     padding: 10px 10px;
-//     white-space: normal !important;
-//     word-wrap: normal !important;
-//     hyphens: manual;
-//   }
-
-//   @else {
-//     padding: 8px 10px;
-//   }
-// }
-
 .sticky-header {
   position: fixed;
   top: 0;
@@ -422,23 +409,39 @@ $pfs: v-bind(pts);
   /* print width */
   font-size: $fs;
 
-  // .q-table{
-  //   @include width-full($full: true);
-  // }
   .q-table {
     max-width: 100% !important;
     max-height: 100% !important;
   }
+}
 
-  // .q-table td {
-  //   font-size: $fs;
-  //   @include wrap($full: false);
-  // }
 
-  // .q-table th {
-  //   font-size: $fs;
-  //   @include wrap($full: false);
-  // }
+.column-x {
+  // specifying max-width so the example can highlight 
+  // the sticky column on any browser window
+  // max-width: 600px;
+
+  thead {
+    tr:last-child {
+      th:last-child {
+        // bg color is important for th; just specify one
+        background-color: $primary;
+        color: $white;
+      }
+    }
+  }
+
+  td:last-child {
+    background-color: $primary;
+    color: $white;
+  }
+
+  th:last-child,
+  td:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 1;
+  }
 }
 
 @media print {
