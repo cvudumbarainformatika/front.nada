@@ -12,12 +12,12 @@
       <!-- FORM -->
 
       <!-- <q-form class="col full-height column" @submit="handleSubmit" @reset="handleReset"> -->
-      <q-card-section class="col full-height scroll" :class="dark ? 'bg-dark' : 'bg-grey-3'">
+      <q-card-section class="col full-height scroll" :class="dark ? 'bg-dark-page' : 'bg-grey-3'">
 
         <app-grid :cols="{ default: 1, sm: 1 }" :gap="16" class="q-mb-md">
 
 
-          <search-bpom ref="searchBpom" @on-select="handleSelectBpom" />
+          <search-bpom ref="searchBpom" @on-select="handleSelectBpom" :dark="dark" />
 
         </app-grid>
 
@@ -223,45 +223,13 @@
 
             <app-input-simrs v-model="form.kelompok_rko" type="textarea" label="KELOMPOK RKO" class=""
               :error-message="errorMessage('kelompok_rko')" :is-error="isError('kelompok_rko')" />
-
-            <!-- <app-autocomplete-debounce-input v-model="form.kelompok_rko" autocomplete="rs2" option-label="rs2"
-              option-value="rs2" valid outlined label="Kelompok RKO" autofocus :source="storeLama.kelompokRKOs"
-              :loading="storeLama.loadingKelompokRKO" @buang="storeLama.getKelompokRKO" /> -->
-
-            <!-- <app-input-simrs v-model="form.status_generik" label="status_generik" class=""
-              :error-message="errorMessage('status_generik')" :is-error="isError('status_generik')" /> -->
-            <!-- <app-input-simrs v-model="form.status_forkid" label="status_forkid" class=""
-              :error-message="errorMessage('status_forkid')" :is-error="isError('status_forkid')" /> -->
-            <!-- <app-input-simrs v-model="form.status_fornas" label="status_fornas" class=""
-              :error-message="errorMessage('status_fornas')" :is-error="isError('status_fornas')" /> -->
-            <!-- <app-input-simrs v-model="form.status_kronis" label="status_kronis" class=""
-              :error-message="errorMessage('status_kronis')" :is-error="isError('status_kronis')" /> -->
-            <!-- <app-input-simrs v-model="form.status_prb" label="status_prb" class=""
-              :error-message="errorMessage('status_prb')" :is-error="isError('status_prb')" /> -->
-            <!-- <app-input-simrs v-model="form.status_konsinyasi" label="status_konsinyasi" class=""
-              :error-message="errorMessage('status_konsinyasi')" :is-error="isError('status_konsinyasi')" /> -->
-
-
-
-
-
-
-
-            <!-- <app-input-simrs v-model="form.obat_program" label="obat_program" class=""
-              :error-message="errorMessage('obat_program')" :is-error="isError('obat_program')" />
-            <app-input-simrs v-model="form.obat_donasi" label="obat_donasi" class=""
-              :error-message="errorMessage('obat_donasi')" :is-error="isError('obat_donasi')" /> -->
-            <!-- <app-input-simrs v-model="form.obat_kebijakan" label="obat_kebijakan" class=""
-              :error-message="errorMessage('obat_kebijakan')" :is-error="isError('obat_kebijakan')" /> -->
-            <!-- <app-input-simrs v-model="form.sistembayar" label="sistembayar" class=""
-              :error-message="errorMessage('sistembayar')" :is-error="isError('sistembayar')" /> -->
           </div>
         </app-grid>
 
       </q-card-section>
       <q-card-actions align="right" class="col-auto q-py-md">
 
-        <app-btn label="Cancel" flat @click="handleReset" />
+        <app-btn label="Cancel" flat :color="dark ? 'white' : 'dark'" @click="handleReset" />
         <app-btn label="Simpan Data" :loading="store.loadingSave" color="primary" @click="handleSubmit" />
       </q-card-actions>
       <!-- </q-form> -->

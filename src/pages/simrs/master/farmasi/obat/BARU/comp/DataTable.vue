@@ -136,7 +136,8 @@
         <template v-if="!loading">
 
           <template v-if="!items?.length">
-            <div class="column flex-center fit absolute-top bg-grey-2" style="min-height:300px">
+            <div class="column flex-center fit absolute-top" :class="dark ? 'bg-dark-page' : 'bg-grey-2'"
+              style="min-height:300px">
               <div>
                 <q-icon name="icon-mat-layers" color="primary" size="50px" />
               </div>

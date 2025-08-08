@@ -24,7 +24,7 @@
 
 
     <!-- modal form -->
-    <ModalForm v-model="store.modalFormOpen" :store="store" />
+    <ModalForm v-model="store.modalFormOpen" :store="store" :dark="dark" />
 
   </q-page>
 </template>

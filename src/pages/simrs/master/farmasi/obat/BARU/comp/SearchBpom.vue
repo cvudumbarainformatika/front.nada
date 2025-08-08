@@ -2,7 +2,7 @@
   <div class="relative-position full-width z-top">
     <q-input v-model="search" outlined class="full-width relative-position" borderless rounded clearable dense
       placeholder="Cari data dari BPOM ..... Enter" @keydown.enter.prevent="handleSearch" :loading="loading"
-      :disable="loading" bg-color="white">
+      :disable="loading" :bg-color="dark ? 'dark' : 'white'">
       <template #prepend>
         <q-icon name="icon-mat-search" size="20px" />
       </template>
@@ -43,6 +43,14 @@
 
 <script setup>
 import { ref } from 'vue'
+
+
+defineProps({
+  dark: {
+    type: Boolean,
+    default: false
+  }
+})
 
 const search = ref('')
 const perPage = ref(3)
