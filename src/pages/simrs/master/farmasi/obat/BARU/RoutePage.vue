@@ -62,7 +62,8 @@
                 <q-item class="q-pa-xs">
                   <q-item-section class="q-pa-none">
                     <q-item-label class="text-weight-bold">KANDUNGAN</q-item-label>
-                    <q-item-label>{{ row?.kandungan || '-' }}</q-item-label>
+                    <!-- <q-item-label lines="5">{{ row?.kandungan || '-' }}</q-item-label> -->
+                    <div class="flex">{{ row?.kandungan || '-' }}</div>
                   </q-item-section>
                 </q-item>
                 <q-item class="q-pa-xs">
@@ -75,7 +76,8 @@
             </template>
 
             <template #cell-belanja="{ row }">
-              <div v-if="row.uraian108" class="row box-dua justify-between items-center no-wrap q-mb-sm">
+              <div v-if="row.uraian108" class="row box-dua justify-between items-center no-wrap q-mb-sm"
+                style="min-width: 250px">
                 <div class="">
                   108
                 </div>
