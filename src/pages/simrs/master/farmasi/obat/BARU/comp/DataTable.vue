@@ -128,7 +128,7 @@
                 </div>
               </div>
             </th>
-            <th v-if="actionField" class="text-right">
+            <th v-if="actionField" class="text-right" width="5%">
               {{ labelAction || "Aksi" }}
             </th>
 
@@ -164,17 +164,18 @@
                 <td v-if="rowImage !== null" class="text-left">
                   <slot :name="'cell-default-img'" :row="item" />
                 </td>
-                <td v-for="( col, idx ) in filterColumn" :key="idx" width="10%" class="text-left">
+                <td v-for="( col, idx ) in filterColumn" :key="idx" width="10%" class="text-left"
+                  style="vertical-align: top;">
                   <slot :name="'cell-' + col" :row="item" :index="i">
                     {{ item[col] }}
                   </slot>
                 </td>
-                <td class="text-right">
+                <td class="text-right" style="vertical-align: top; ">
                   <div class="row justify-end items-center">
                     <!-- class="q-ml-md" -->
                     <slot name="left-acttion" :row="item" :col="i" />
-                    <div v-if="actionField">
-                      <q-btn v-if="adaEdit" flat class="" size="sm" round color="grey" icon="icon-mat-edit"
+                    <div v-if="actionField" class="q-gutter-xs">
+                      <q-btn v-if="adaEdit" class="" size="sm" round color="grey" icon="icon-mat-edit"
                         @click="handleEdit(item)">
                         <q-tooltip anchor="top middle" self="center middle">
                           Edit Data
@@ -183,7 +184,7 @@
                       <template v-if="selected?.length < 2 && adaDelete">
                         <q-spinner v-if="store.loadingDelete && idRemove === item?.id" color="negative" size="1.5em"
                           :thickness="3" />
-                        <q-btn v-else flat class="" size="sm" round color="negative" icon="icon-mat-delete_sweep"
+                        <q-btn v-else class="" size="sm" round color="negative" icon="icon-mat-delete_sweep"
                           @click="deleteOne(item.id)">
                           <q-tooltip anchor="top middle" self="center middle">
                             Delete Data
@@ -229,7 +230,7 @@
 
 <script setup>
 import { ref, watch, computed, onMounted } from 'vue'
-import { useQuasar } from 'quasar'
+import { useQuasar, getCssVar } from 'quasar'
 import PaginateTable from './PaginateTable.vue'
 
 const props = defineProps({
@@ -383,11 +384,19 @@ const goTo = (page) => {
 }
 
 
+const bgAction = computed(() => {
+  return props.dark ? getCssVar('dark') : getCssVar('dark-light')
+})
+
+
 </script>
 
 <style lang="scss" scoped>
 $fs : v-bind(ts);
 $pfs: v-bind(pts);
+
+$white: #fff;
+$aksi: v-bind(bgAction);
 
 .sticky-header {
   position: fixed;
@@ -425,14 +434,14 @@ $pfs: v-bind(pts);
     tr:last-child {
       th:last-child {
         // bg color is important for th; just specify one
-        background-color: $primary;
+        background-color: $dark-light;
         color: $white;
       }
     }
   }
 
   td:last-child {
-    background-color: $primary;
+    background-color: $dark-light;
     color: $white;
   }
 

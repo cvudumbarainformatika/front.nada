@@ -73,6 +73,7 @@
                   :label="row.jenis_perbekalan" />
               </div>
             </template>
+
             <template #cell-kelompok="{ row }">
               <div v-if="row.kelompok_psikotropika" class="row box justify-between items-center no-wrap q-mb-sm">
                 <div>
@@ -150,6 +151,8 @@
                 </div>
               </div>
             </template>
+
+
             <template #cell-belanja="{ row }">
               <div v-if="row.uraian108" class="row box-dua justify-between items-center no-wrap q-mb-sm">
                 <div class="">
@@ -334,7 +337,7 @@ const table = useMasterObatTable()
 const store = useMasterObatForm()
 table.getDataTable()
 store.getInitialData()
-function sisBay (val) {
+function sisBay(val) {
   switch (val) {
     case 'UMUM':
       return 'text-indigo'
@@ -346,7 +349,7 @@ function sisBay (val) {
       return ''
   }
 }
-function gudang (val) {
+function gudang(val) {
   const gud = store.optionGudangs.find(x => x.value === val)
 
   return gud?.label ?? '-'

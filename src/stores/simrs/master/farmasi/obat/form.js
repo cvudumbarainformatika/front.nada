@@ -99,7 +99,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
   }),
   actions: {
     // local related actions
-    resetFORM () {
+    resetFORM() {
       console.log('reset form')
       this.form = { kelasterapis: [], indikasis: [] }
       this.namaObat = {
@@ -119,13 +119,13 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
       // }
       // this.setForm('kd_obat', 'dasdasdasds1')
     },
-    setForm (nama, val) {
+    setForm(nama, val) {
       this.form[nama] = val
     },
-    pushKelasTerapi (val) {
+    pushKelasTerapi(val) {
       this.form.kelasterapis.push({ kelasterapi: val })
     },
-    removeIndikasi (i) {
+    removeIndikasi(i) {
       const ter = this.form.indikasis[i]
       if (this.edited && Object.keys(ter)?.length) {
         // console.log('ter ', ter)
@@ -133,7 +133,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
       }
       this.form.indikasis.splice(i, 1)
     },
-    removeKelasTerapi (i) {
+    removeKelasTerapi(i) {
       const ter = this.form.kelasterapis[i]
       if (this.edited && Object.keys(ter)?.length) {
         // console.log('ter ', ter)
@@ -141,16 +141,16 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
       }
       this.form.kelasterapis.splice(i, 1)
     },
-    deleteForm (nama) {
+    deleteForm(nama) {
       this.form[nama] = null
     },
-    setNamaObat (key, val) {
+    setNamaObat(key, val) {
       this.namaObat[key] = val
     },
-    deleteNamaObat (key) {
+    deleteNamaObat(key) {
       this.namaObat[key] = null
     },
-    setFormNamaObat () {
+    setFormNamaObat() {
       const jenisPerbekalan = !!(this.form.jenis_perbekalan === 'Reagen' || (this.form.jenis_perbekalan ? this.form.jenis_perbekalan.includes('Alkes') : false))
       const nama = this.namaObat.nama ? this.namaObat.nama : ''
       const merk = this.namaObat.merk && jenisPerbekalan ? ' ' + this.namaObat.merk : ''
@@ -160,15 +160,15 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
       const namaObat = nama + kekuatanDosis + volumeSediaan + bentukSediaan + merk
       this.setForm('nama_obat', namaObat)
     },
-    setOpen () {
+    setOpen() {
       this.isOpen = !this.isOpen
     },
-    newData () {
+    newData() {
       this.resetFORM()
       this.edited = false
       this.isOpen = !this.isOpen
     },
-    editData (val) {
+    editData(val) {
       this.edited = true
       console.log('edit ', val)
       if (val.mkelasterapi?.length) {
@@ -222,7 +222,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
       this.setNamaObat('nama', nama)
       this.isOpen = !this.isOpen
     },
-    getInitialData () {
+    getInitialData() {
       this.getJenisProduk('')
       this.getJenisPerbekalan('')
       this.getKodeBelanja('')
@@ -238,14 +238,14 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
       this.getKelasTerapi('')
       this.getCountSatuan()
     },
-    quickSet (key, val, array, pushed) {
+    quickSet(key, val, array, pushed) {
       array.push(pushed)
       this.setForm(key, val)
       this.setNamaObat(key, val)
     },
     // api related actions
     // ambil Jenis produk
-    async getJenisProduk (val) {
+    async getJenisProduk(val) {
       this.loadingJenisProduk = true
       const param = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listjenisproduk', param)
@@ -259,7 +259,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil kelas terapi
-    async getKelasTerapi (val) {
+    async getKelasTerapi(val) {
       this.loadingKelasTerapi = true
       const param = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listkelasterapi', param)
@@ -273,7 +273,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil kelompok Rko
-    async getKelompokRKO (val) {
+    async getKelompokRKO(val) {
       this.loadingKelompokRKO = true
       const param = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listrko', param)
@@ -287,7 +287,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil kelompok penyimpanan
-    async getKelompokPenyimpanan (val) {
+    async getKelompokPenyimpanan(val) {
       this.loadingKelompokPenyimpanan = true
       const param = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listkelompokpenyimpanan', param)
@@ -300,7 +300,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil Merk
-    async getMerk (val) {
+    async getMerk(val) {
       this.loadingMerk = true
       const param = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listmerk', param)
@@ -313,7 +313,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil satuan Kecil
-    async getSatuanKec (val) {
+    async getSatuanKec(val) {
       this.loadingSatuanK = true
       const param = {
         params: {
@@ -331,7 +331,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil satuan besar
-    async getSatuanBes (val) {
+    async getSatuanBes(val) {
       this.loadingSatuanB = true
       const param = {
         params: {
@@ -349,7 +349,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil jumlah satuan
-    async getCountSatuan () {
+    async getCountSatuan() {
       await api.get('v1/satuan/count')
         .then(resp => {
           this.countSatuan = resp.data + 1
@@ -357,7 +357,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil list jenis perbekalan
-    async getJenisPerbekalan (val) {
+    async getJenisPerbekalan(val) {
       this.loadingJenisPerbekalan = true
       const param = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listmjenisperbekalan', param)
@@ -370,7 +370,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil list kode Belanja
-    async getKodeBelanja (val) {
+    async getKodeBelanja(val) {
       this.loadingKodeBelanja = true
       const param = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listkodebelanjaobat', param)
@@ -384,7 +384,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil list kandungan
-    async getKandungan (val) {
+    async getKandungan(val) {
       this.loadingKandungan = true
       const params = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listkandungan_namagenerik', params)
@@ -397,7 +397,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil list Bantuk Sediaan
-    async getBetukSediaan (val) {
+    async getBetukSediaan(val) {
       this.loadingBentukSediaan = true
       const param = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listbentuksediaan', param)
@@ -410,7 +410,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil list kekuatan dosis
-    async getKekuatanDosis (val) {
+    async getKekuatanDosis(val) {
       this.loadingKekuatanDosis = true
       const param = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listkekuatandosis', param)
@@ -423,7 +423,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // ambil list Volume sediaan
-    async getVolumeSediaan (val) {
+    async getVolumeSediaan(val) {
       this.loadingVolumeSediaan = true
       const param = { params: { q: val } }
       await api.get('v1/simrs/farmasi/master/listvolumesediaan', param)
@@ -436,7 +436,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
         })
     },
     // tambah
-    saveForm () {
+    saveForm() {
       this.loading = true
 
       return new Promise((resolve, reject) => {
@@ -459,7 +459,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
       })
     },
     // simpan cepat start----
-    async simpanCepatJenisProduk (val) {
+    async simpanCepatJenisProduk(val) {
       // console.log('simpan cepat', val)
       this.loadingJenisProduk = true
       const form = { jenisproduk: val }
@@ -471,7 +471,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.quickSet('jenisproduk', temp.jenisproduk, this.jenisProduks, temp)
         }).catch(() => { this.loadingJenisProduk = false })
     },
-    async simpanCepatKelompokPenyimpanan (val) {
+    async simpanCepatKelompokPenyimpanan(val) {
       // console.log('simpan cepat', val)
       this.loadingKelompokPenyimpanan = true
       const form = { kelompokpenyimpanan: val }
@@ -483,7 +483,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.quickSet('kelompok_penyimpanan', temp.kelompokpenyimpanan, this.kelompokPenyimpanans, temp)
         }).catch(() => { this.loadingKelompokPenyimpanan = false })
     },
-    async simpanCepatKelasTerapi (val) {
+    async simpanCepatKelasTerapi(val) {
       // console.log('simpan cepat', val)
       this.loadingKelasTerapi = true
       const form = { kelasterapi: val }
@@ -498,7 +498,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.temp.kelas_terapi = temp.kelasterapi
         }).catch(() => { this.loadingKelasTerapi = false })
     },
-    async simpanCepatVolumeSediaan (val) {
+    async simpanCepatVolumeSediaan(val) {
       // console.log('simpan cepat', val)
       this.loadingVolumeSediaan = true
       const form = { volumesediaan: val }
@@ -511,7 +511,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.setFormNamaObat()
         }).catch(() => { this.loadingVolumeSediaan = false })
     },
-    async simpanCepatKekuatanDosis (val) {
+    async simpanCepatKekuatanDosis(val) {
       // console.log('simpan cepat', val)
       this.loadingKekuatanDosis = true
       const form = { kekuatandosis: val }
@@ -524,7 +524,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.setFormNamaObat()
         }).catch(() => { this.loadingKekuatanDosis = false })
     },
-    async simpanCepatBentukSediaan (val) {
+    async simpanCepatBentukSediaan(val) {
       // console.log('simpan cepat', val)
       this.loadingBentukSediaan = true
       const form = { bentuksediaan: val }
@@ -537,7 +537,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.setFormNamaObat()
         }).catch(() => { this.loadingBentukSediaan = false })
     },
-    async simpanCepatSatuanBes (val) {
+    async simpanCepatSatuanBes(val) {
       // console.log('simpan cepat', val)
       this.loadingSatuanB = true
       const form = { nama: val, kode: this.countSatuan }
@@ -550,7 +550,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.getCountSatuan()
         }).catch(() => { this.loadingSatuanB = false })
     },
-    async simpanCepatSatuanKec (val) {
+    async simpanCepatSatuanKec(val) {
       // console.log('simpan cepat', val)
       this.loadingSatuanK = true
       const form = { nama: val, kode: this.countSatuan }
@@ -563,7 +563,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.getCountSatuan()
         }).catch(() => { this.loadingSatuanK = false })
     },
-    async simpanCepatMerk (val) {
+    async simpanCepatMerk(val) {
       // console.log('simpan cepat', val)
       this.loadingMerk = true
       const form = { merk: val }
@@ -576,7 +576,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.setFormNamaObat()
         }).catch(() => { this.loadingMerk = false })
     },
-    async simpanCepatKandungan (val) {
+    async simpanCepatKandungan(val) {
       // console.log('simpan cepat', val)
       this.loadingKandungan = true
       const form = { nama: val }
@@ -588,7 +588,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.quickSet('kandungan', temp.nama, this.kandungans, temp)
         }).catch(() => { this.loadingKandungan = false })
     },
-    async simpanCepatJenisPerbekalan (val) {
+    async simpanCepatJenisPerbekalan(val) {
       console.log('simpan cepat', val)
       this.loadingJenisPerbekalan = true
       const form = { jenisperbekalan: val }
@@ -603,7 +603,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
     },
     // simpan cepat end----
     // hapus maping kelas terapi
-    async hapusMaping (val) {
+    async hapusMaping(val) {
       console.log('hapus maping', val)
       this.loadingKelasTerapi = true
       const form = { id: val }
@@ -615,7 +615,7 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
           this.loadingKelasTerapi = false
         }).catch(() => { this.loadingKelasTerapi = false })
     },
-    async hapusIndikasi (val) {
+    async hapusIndikasi(val) {
       console.log('hapus maping', val)
       this.loadingIndikasi = true
       const form = { id: val }

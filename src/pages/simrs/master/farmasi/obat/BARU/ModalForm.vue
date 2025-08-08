@@ -29,19 +29,24 @@
           <div class="full-width column q-gutter-sm">
 
             <div class="full-width col-span-1">
-              <div class="text-weight-bold f-14">🧾 Identitas Obat</div>
+              <div class="text-weight-bold f-14">📝 Identitas Obat</div>
               <q-separator class="q-my-xs"></q-separator>
             </div>
 
 
-            <app-input-simrs v-model="form.nama_obat" label="NAMA" class="" :error-message="errorMessage('nama_obat')"
-              :is-error="isError('nama_obat')" />
+            <app-input-simrs v-model="form.nama" label="NAMA" class="" :error-message="errorMessage('nama')"
+              :is-error="isError('nama')" />
+
+
+
             <app-input-simrs v-model="form.barcode" label="BARCODE" class="" :error-message="errorMessage('barcode')"
               :is-error="isError('barcode')" />
             <app-input-simrs v-model="form.merk" label="MERK" class="" :error-message="errorMessage('merk')"
               :is-error="isError('merk')" />
+
             <app-input-simrs v-model="form.kandungan" type="textarea" label="KANDUNGAN" class=""
               :error-message="errorMessage('kandungan')" :is-error="isError('kandungan')" />
+
             <app-input-simrs v-model="form.bentuk_sediaan" label="BENTUK SEDIAAN" class=""
               :error-message="errorMessage('bentuk_sediaan')" :is-error="isError('bentuk_sediaan')" />
             <app-input-simrs v-model="form.kekuatan_dosis" label="KEKUATAN DOSIS" class=""
@@ -58,6 +63,11 @@
                 option-value="nama" outlined valid label="SATUAN KCL" autofocus :source="storeLama.satuanKs"
                 @buang="storeLama.getSatuanKec"
                 @on-enter="(val) => myDialog(storeLama.simpanCepatSatuanKec, val, 'Satuan Kecil')" /> -->
+
+              <div class="full-width col-span-2">
+                <div class="text-weight-bold f-14 text-negative"> 💊 {{ form.nama_obat }}</div>
+              </div>
+
             </app-grid>
 
 
@@ -99,7 +109,7 @@
           <div class="full-width column q-gutter-sm">
 
             <div class="full-width col-span-1">
-              <div class="text-weight-bold f-14">⚠️ Status Khusus & Regulasi</div>
+              <div class="text-weight-bold f-14">🌡️ Status Khusus & Regulasi</div>
               <q-separator class="q-my-xs"></q-separator>
             </div>
 
@@ -238,7 +248,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, watchEffect } from 'vue'
 import { Dialog } from 'quasar'
 import SearchBpom from './comp/SearchBpom.vue'
 import { useMasterObatForm } from 'src/stores/simrs/master/farmasi/obat/form'
@@ -262,7 +272,8 @@ const searchBpom = ref(null)
 
 const form = ref({
   'kd_obat': null,
-  'nama_obat': '',
+  'nama': null, // nama obat dari bpom
+  'nama_obat': '', // nama sambung
   'barcode': '',
   'merk': '',
   'kandungan': '',
@@ -375,7 +386,7 @@ const handleSelectBpom = (item) => {
   const { satuan_besar, satuan_kecil, volume_sediaan } = parseProductPackage(item?.PRODUCT_PACKAGE)
 
 
-  form.value.nama_obat = item?.PRODUCT_NAME ?? ''
+  form.value.nama = item?.PRODUCT_NAME ?? ''
   form.value.barcode = item?.PRODUCT_ATC ?? ''
   form.value.satuan_b = satuan_besar
   form.value.satuan_k = satuan_kecil
@@ -404,6 +415,48 @@ function parseProductPackage(text) {
   };
 }
 
+function sambungNamaObat() {
+  // const jenisPerbekalan = !!(form.value.jenis_perbekalan === 'Reagen' || (form.value.jenis_perbekalan ? form.value.jenis_perbekalan.includes('Alkes') : false))
+  // const nama = this.namaObat.nama ? this.namaObat.nama : ''
+  // const merk = this.namaObat.merk && jenisPerbekalan ? ' ' + this.namaObat.merk : ''
+  // const bentukSediaan = this.namaObat.bentukSediaan ? ' ' + this.namaObat.bentukSediaan : ''
+  // const volumeSediaan = this.namaObat.volumeSediaan ? ' ' + this.namaObat.volumeSediaan : ''
+  // const kekuatanDosis = this.namaObat.kekuatanDosis ? ' ' + this.namaObat.kekuatanDosis : ''
+  // const namaObat = nama + kekuatanDosis + volumeSediaan + bentukSediaan + merk
+
+  // form.value.nama_obat = namaObat
+
+
+  const isPerbekalan = ['Reagen', 'Alkes', 'Alkes Lainnya'].some(jenis =>
+    form.value.jenis_perbekalan?.includes(jenis)
+  )
+
+  const {
+    nama = '',
+    merk = '',
+    bentuk_sediaan = '',
+    volumesediaan = '',
+    kekuatan_dosis = ''
+  } = form.value
+
+  const namaObat = [
+    nama,
+    kekuatan_dosis,
+    volumesediaan,
+    bentuk_sediaan,
+    isPerbekalan ? merk : ''
+  ].filter(Boolean).join(' ')
+
+  form.value.nama_obat = namaObat
+
+  // console.log('form nama obat', namaObat);
+
+}
+
+
+watchEffect(() => {
+  sambungNamaObat()
+})
 
 function myDialog(func, val, anu) {
   Dialog.create({
