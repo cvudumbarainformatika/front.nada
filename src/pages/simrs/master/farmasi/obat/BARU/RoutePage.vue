@@ -5,9 +5,9 @@
 
 
 
-        <q-card-section class="col full-height relative-position q-pa-xs">
+        <q-card-section class="col fit relative-position q-pa-xs overflow-hidden">
           <DataTable flat bordered class="rounded-xl shadow-sm" :store="store" :loading="store.loading"
-            :columns="store.columns" :column-hide="store.columnHide" :items="store.items" :meta="store.meta"
+            :columns="store.getterColumns" :column-hide="store.columnHide" :items="store.items" :meta="store.meta"
             :dark="dark">
 
             <template v-slot:col-kode_jabatan="{ row, left, right }">

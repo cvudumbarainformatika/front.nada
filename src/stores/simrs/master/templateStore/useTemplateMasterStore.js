@@ -7,8 +7,8 @@ export function createTemplateMasterStore(storeId, config) {
     state: () => ({
       items: [],
       meta: null,
-      columns: config.columns,
-      columnHide: ['id', 'created_at', 'updated_at', 'deleted_at'],
+      columns: config?.columns || [],
+      columnHide: config?.columnHide || [],
 
 
       item: null,
@@ -51,8 +51,11 @@ export function createTemplateMasterStore(storeId, config) {
     actions: {
 
       setColumns(payload) {
-        const thumb = payload.map((x) => Object.keys(x))
-        this.columns = thumb[0]
+        // const thumb = payload.map((x) => Object.keys(x))
+        // this.columns = thumb[0]
+
+        // console.log('columns', this.columns);
+
       },
 
       async fetchAll(extraParams = {}) {
@@ -69,6 +72,9 @@ export function createTemplateMasterStore(storeId, config) {
           const res = await api.get(config.baseUrl + '/get-list', { params })
           console.log(`resp ${storeId} getList : `, res);
 
+
+
+          this.setColumns(res.data.data)
           this.items = res.data.data ?? res.data ?? []
           this.meta = res.data.meta ?? res.meta ?? null
           this.hasMore = this.page < (this.meta?.last_page ?? 1)
@@ -130,7 +136,12 @@ export function createTemplateMasterStore(storeId, config) {
           if (res.status === 200) {
             const result = res.data.data
             if (this.mode === 'add') {
-              this.items.unshift(result)
+              if (this.items.length) {
+                this.items.unshift(result)
+              } else {
+                this.fetchAll()
+              }
+
             } else {
               const index = this.items?.findIndex(item => item.id === result.id)
               if (index !== -1) {
