@@ -34,6 +34,10 @@
         </q-card-section>
       </q-card>
     </div>
+    <div v-else-if="!items?.length && search" class="absolute-top full-width column flex-center bg-white"
+      style="top:40px; height:80px">
+      <div>Tidak ditemukan data ... </div>
+    </div>
 
 
   </div>

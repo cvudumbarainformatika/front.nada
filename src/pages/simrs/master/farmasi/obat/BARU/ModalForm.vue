@@ -49,10 +49,15 @@
 
             <app-input-simrs v-model="form.bentuk_sediaan" label="BENTUK SEDIAAN" class=""
               :error-message="errorMessage('bentuk_sediaan')" :is-error="isError('bentuk_sediaan')" />
-            <app-input-simrs v-model="form.kekuatan_dosis" label="KEKUATAN DOSIS" class=""
-              :error-message="errorMessage('kekuatan_dosis')" :is-error="isError('kekuatan_dosis')" />
-            <app-input-simrs v-model="form.volumesediaan" label="VOLUME SEDIAAN" class=""
-              :error-message="errorMessage('volumesediaan')" :is-error="isError('volumesediaan')" />
+
+
+            <app-grid :cols="{ default: 1, md: 2 }" :gap="16">
+              <app-input-simrs v-model="form.kekuatan_dosis" label="KEKUATAN DOSIS" class=""
+                :error-message="errorMessage('kekuatan_dosis')" :is-error="isError('kekuatan_dosis')" />
+              <app-input-simrs v-model="form.volumesediaan" label="VOLUME SEDIAAN" class=""
+                :error-message="errorMessage('volumesediaan')" :is-error="isError('volumesediaan')" />
+
+            </app-grid>
 
             <app-grid :cols="{ default: 1, md: 2 }" :gap="16">
               <app-input-simrs v-model="form.satuan_b" label="SATUAN BSR" class=""
