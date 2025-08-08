@@ -1,24 +1,10 @@
 <template>
-  <q-chip
-    :outline="outline"
-    :square="square"
-    :color="color"
-    :text-color="textColor"
-    dense
-    class="chip full-width cursor-pointer"
-  >
-    <div
-      class="full-width text-center wrap"
-      :class="font"
-    >
+  <q-chip :outline="outline" :square="square" :color="color" :text-color="textColor" dense
+    class="chip full-width cursor-pointer">
+    <div class="full-width text-center wrap q-px-sm" :class="font">
       {{ label }}
     </div>
-    <q-tooltip
-      v-if="adaTooltip"
-      anchor="top middle"
-      self="bottom middle"
-      :offset="[0, 0]"
-    >
+    <q-tooltip v-if="adaTooltip" anchor="top middle" self="bottom middle" :offset="[0, 0]">
       {{ tooltip }}
     </q-tooltip>
   </q-chip>
@@ -37,9 +23,10 @@ defineProps({
 })
 </script>
 <style lang="scss" scoped>
-.chip{
+.chip {
   padding: 0px;
-  .q-chip__content{
+
+  .q-chip__content {
     justify-content: center;
   }
 }

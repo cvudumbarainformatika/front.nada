@@ -397,7 +397,7 @@ const handleSelectBpom = (item) => {
   form.value.satuan_k = satuan_kecil
   form.value.volumesediaan = volume_sediaan
   form.value.bentuk_sediaan = item?.PRODUCT_FORM ?? ''
-  form.value.kandungan = item?.INGREDIENTS ?? ''
+  form.value.kandungan = item?.INGREDIENTS?.replace(/&lt;br&gt;/g, ', ') ?? ''
 
   // console.log('refSearch', searchBpom.value);
 
