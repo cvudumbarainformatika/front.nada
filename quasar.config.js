@@ -62,7 +62,7 @@ export default defineConfig((ctx) => {
 
         BPOM_URL: ctx?.dev
           ? '/bpom'
-          : 'http://103.139.192.183:3000'
+          : '/bpom'
 
       },
 
