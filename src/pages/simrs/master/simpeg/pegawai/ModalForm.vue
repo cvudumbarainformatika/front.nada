@@ -108,7 +108,7 @@
             <div class="col-span-1">
               <app-autocomplete label="JABATAN" v-model="form.jabatan" autocomplete="jabatan"
                 option-value="kode_jabatan" option-label="jabatan" outlined :disable="store.disabled"
-                :source="storeJabatan.items" @update:model-value="(val) => serahTerima(val)" />
+                :source="storeJabatan.items" />
             </div>
             <div class="col-span-1">
               <app-input-simrs v-model="form.profesi" label="PROFESI" :error-message="errorMessage('profesi')"
