@@ -57,6 +57,13 @@ export default defineConfig((ctx) => {
           // ? 'http://localhost:8000/storage/'
           ? 'http://103.139.192.183:3501/'
           : 'http://103.139.192.183:3501/',
+
+
+
+        BPOM_URL: ctx?.dev
+          ? '/bpom'
+          : 'http://103.139.192.183:3000'
+
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'

@@ -108,7 +108,7 @@ const handleSearch = async () => {
   const rows = perPage.value
 
   try {
-    const res = await fetch('/bpom/scrape?nama=' + nama + '&per_page=' + rows)
+    const res = await fetch(`${process.env.BPOM_URL}` + '/scrape?nama=' + nama + '&per_page=' + rows)
     const data = await res.json()
     items.value = data?.data || []
 
