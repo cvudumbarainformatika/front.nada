@@ -5,7 +5,7 @@
 
 
 
-        <q-card-section class="col full-height relative-position q-pa-xs">
+        <q-card-section class="col fit relative-position q-pa-xs overflow-hidden">
           <DataTable flat bordered class="rounded-xl shadow-sm" :store="store" :loading="store.loading"
             :columns="store.columns" :column-hide="store.columnHide" :items="store.items" :meta="store.meta"
             :dark="dark">
@@ -31,7 +31,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useMasterJabatanStore } from 'src/stores/simrs/master/templateStore/register'
+import { useMasterJabatanStore, useMasterPegawaiStore } from 'src/stores/simrs/master/templateStore/register'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 import DataTable from './comp/DataTable.vue'
@@ -40,7 +40,8 @@ import ModalForm from './ModalForm.vue'
 
 
 
-const store = useMasterJabatanStore()
+const store = useMasterPegawaiStore()
+
 const router = useRouter()
 const $q = useQuasar()
 
@@ -59,7 +60,8 @@ onMounted(() => {
   store.params.order_by = 'id'
   store.params.per_page = 20
   Promise.all([
-    store.fetchAll()
+    store.fetchAll(),
+
   ])
 })
 </script>

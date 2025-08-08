@@ -30,11 +30,10 @@
               </div>
             </div>
 
-            <div>aaa</div>
           </div> -->
 
-          <app-grid :cols="{ default: 1, sm: 3 }" :gap="16">
-            <div class="col-span-1">
+          <app-grid :cols="{ default: 1, sm: 2 }" :gap="16">
+            <!-- <div class="col-span-1">
               <div v-if="store?.item">
                 <app-avatar-pasien width="100%" :pasien="store?.item" />
               </div>
@@ -42,59 +41,105 @@
                 <q-img src="~assets/images/nouser.png" spinner-color="white" />
               </div>
               <div class="text-center q-mt-md font-bold text-primary cursor-pointer">Ubah Berkas</div>
+            </div> -->
+
+            <div class="col-span-2 q-gutter-md">
+              <div class="text-bold">BIODATA DIRI</div>
+              <q-separator class="q-my-xs"></q-separator>
+              <app-grid :cols="{ default: 1, sm: 2 }">
+                <div class="col-span-1 q-gutter-md">
+                  <app-input-simrs v-model="form.nip" label="NIP" :error-message="errorMessage('nip')"
+                    :is-error="isError('nip')" />
+                  <app-input-simrs v-model="form.nik" label="NIK" :error-message="errorMessage('nik')"
+                    :is-error="isError('nik')" />
+                  <app-input-simrs v-model="form.nama" label="NAMA" :error-message="errorMessage('nama')"
+                    class="col-span-2" :is-error="isError('nama')" />
+                  <app-input-simrs type="textarea" v-model="form.alamat" label="ALAMAT"
+                    :error-message="errorMessage('alamat')" :is-error="isError('alamat')" class="col-span-2" />
+                  <app-input-simrs v-model="form.telp" label="TELEPON" :error-message="errorMessage('telp')"
+                    :is-error="isError('telp')" class="col-span-2" />
+
+                </div>
+                <div class="col-span-1 q-gutter-md">
+                  <div class="full-width q-gutter-md ">
+                    <div class="row q-pl-sm q-pb-md q-py-xs">
+                      <div class="col-auto"> JENIS KELAMIN : </div>
+                      <div class="col-auto">
+                        <div class="q-gutter-sm">
+                          <q-option-group v-model="form.kelamin" :options="jensikelamin" color="primary" class="q-ml-md"
+                            dense inline />
+                        </div>
+                      </div>
+                    </div>
+                    <app-input-simrs v-model="form.templahir" label="TEMPAT LAHIR"
+                      :error-message="errorMessage('templahir')" :is-error="isError('templahir')" class="col-span-2" />
+
+                    <app-input-date-human v-model="form.tgllahir" label="TANGGAL LAHIR" icon="icon-mat-event" outlined
+                      :autofocus="false" @db-model="tglLahir" />
+                    <app-input-simrs v-model="form.email" label="EMAIL" :error-message="errorMessage('email')"
+                      :is-error="isError('email')" class="col-span-2" />
+                    <app-input-simrs v-model="form.pass" label="PASSWORD" :error-message="errorMessage('pass')"
+                      :is-error="isError('pass')" class="col-span-2" />
+                  </div>
+                </div>
+
+              </app-grid>
             </div>
+          </app-grid>
 
-            <div class="col-span-1">
-              <div class="full-width q-gutter-md">
-                <div class="text-bold">Biodata Diri</div>
-                <q-separator class="q-my-xs"></q-separator>
-                <app-input-simrs v-model="form.nip" label="NIP" :error-message="errorMessage('nip')"
-                  :is-error="isError('nip')" />
-                <app-input-simrs v-model="form.nik" label="NIK" :error-message="errorMessage('nik')"
-                  :is-error="isError('nik')" />
-                <app-input-simrs v-model="form.nama" label="Nama" :error-message="errorMessage('nama')"
-                  class="col-span-2" :is-error="isError('nama')" />
+          <app-grid :cols="{ default: 1, sm: 2 }" :gap="12" class="q-mt-md">
 
-                <app-input-simrs type="textarea" v-model="form.alamat" label="Alamat"
-                  :error-message="errorMessage('alamat')" :is-error="isError('alamat')" class="col-span-2" />
-                <app-input-simrs v-model="form.kelamin" label="Kelamin" :error-message="errorMessage('kelamin')"
-                  :is-error="isError('kelamin')" class="col-span-2" />
-
-                <app-input-simrs v-model="form.templahir" label="Tempat Lahir"
-                  :error-message="errorMessage('templahir')" :is-error="isError('templahir')" class="col-span-2" />
-                <app-input-simrs v-model="form.tgllahir" label="tgllahir" :error-message="errorMessage('tgllahir')"
-                  :is-error="isError('tgllahir')" class="col-span-2" />
-
+            <!-- <div class="full-width q-gutter-md"> -->
+            <div class="col-span-2 q-gutter-md">
+              <div class="text-bold">DATA PEGAWAI</div>
+              <q-separator class="q-my-xs"></q-separator>
+            </div>
+            <div class="col-span-1 q-gutter-md">
+              <div class="row q-pl-sm q-pb-md q-py-xs">
+                <div class="col-auto"> STATUS PEGAWAI : </div>
+                <div class="col-auto">
+                  <div class="q-gutter-sm">
+                    <q-option-group v-model="form.aktif" :options="statuspegawai" color="primary" class="q-ml-md" dense
+                      inline />
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div class="col-span-1 q-gutter-md">
-              <app-input-simrs v-model="form.jenispegawai" label="jenispegawai"
-                :error-message="errorMessage('jenispegawai')" :is-error="isError('jenispegawai')" class="col-span-2" />
-              <app-input-simrs v-model="form.flag" label="flag" :error-message="errorMessage('flag')"
-                :is-error="isError('flag')" class="col-span-2" />
-              <app-input-simrs v-model="form.jabatan" label="jabatan" :error-message="errorMessage('jabatan')"
-                :is-error="isError('jabatan')" class="col-span-2" />
-              <app-input-simrs v-model="form.profesi" label="profesi" :error-message="errorMessage('profesi')"
+            <div class="col-span-1">
+              <app-autocomplete label="JABATAN" v-model="form.jabatan" autocomplete="jabatan"
+                option-value="kode_jabatan" option-label="jabatan" outlined :disable="store.disabled"
+                :source="storeJabatan.items" @update:model-value="(val) => serahTerima(val)" />
+            </div>
+            <div class="col-span-1">
+              <app-input-simrs v-model="form.profesi" label="PROFESI" :error-message="errorMessage('profesi')"
                 :is-error="isError('profesi')" class="col-span-2" />
-              <app-input-simrs v-model="form.golruang" label="golruang" :error-message="errorMessage('golruang')"
-                :is-error="isError('golruang')" class="col-span-2" />
-
-              <app-input-simrs v-model="form.pendidikan" label="pendidikan" :error-message="errorMessage('pendidikan')"
-                :is-error="isError('pendidikan')" class="col-span-2" />
-
-              <app-input-simrs v-model="form.aktif" label="aktif" :error-message="errorMessage('aktif')"
-                :is-error="isError('aktif')" class="col-span-2" />
-              <app-input-simrs v-model="form.bagian" label="bagian" :error-message="errorMessage('bagian')"
-                :is-error="isError('bagian')" class="col-span-2" />
+            </div>
+            <div class="col-span-1">
+              <app-input-simrs v-model="form.statusspesialis" label="SATTUS SPESIALIS"
+                :error-message="errorMessage('statusspesialis')" :is-error="isError('statusspesialis')"
+                class="col-span-2" />
+            </div>
+            <div class="col-span-1">
+              <app-input-simrs v-model="form.kdgroupnakes" label="GROUP NAKES"
+                :error-message="errorMessage('kdgroupnakes')" :is-error="isError('kdgroupnakes')" class="col-span-2" />
+            </div>
+            <div class="col-span-1">
+              <app-input-simrs v-model="form.kddpjp" label="STATUS DPJP" :error-message="errorMessage('kddpjp')"
+                :is-error="isError('kddpjp')" class="col-span-2" />
+            </div>
+            <div class="col-span-1">
+              <app-input-simrs v-model="form.kdruangansim" label="RUANG SIMRS"
+                :error-message="errorMessage('kdruangansim')" :is-error="isError('kdruangansim')" class="col-span-2" />
+            </div>
+            <div class="col-span-1">
+              <app-input-simrs v-model="form.satset_uuid" label="SATSET UUID"
+                :error-message="errorMessage('satset_uuid')" :is-error="isError('satset_uuid')" class="col-span-2" />
             </div>
           </app-grid>
 
 
-
-
           <!-- INPUT DI BAWAHNYA -->
-          <app-grid :cols="{ default: 1, sm: 4 }" :gap="12" class="q-mt-md">
+          <!-- <app-grid :cols="{ default: 1, sm: 4 }" :gap="12" class="q-mt-md">
 
             <app-input-simrs v-model="form.ruang" label="ruang" :error-message="errorMessage('ruang')"
               :is-error="isError('ruang')" />
@@ -150,10 +195,7 @@
             <app-input-simrs v-model="form.satset_uuid" label="satset_uuid" :error-message="errorMessage('satset_uuid')"
               :is-error="isError('satset_uuid')" />
 
-
-
-
-          </app-grid>
+          </app-grid> -->
           <!-- </div> -->
         </q-card-section>
         <q-card-actions align="right" class="col-auto">
@@ -167,8 +209,10 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
-
+import { date } from 'quasar'
+import { useMasterJabatanStore } from 'src/stores/simrs/master/templateStore/register'
+import { ref, computed, watch, onMounted } from 'vue'
+const storeJabatan = useMasterJabatanStore()
 const props = defineProps({
   dark: {
     type: Boolean,
@@ -179,70 +223,51 @@ const props = defineProps({
     default: null
   }
 })
+onMounted(() => {
+  Promise.all([
+    storeJabatan.fetchAll(),
+    console.log('🔥 storeJabatan', storeJabatan.items)
+  ])
+})
 
 const form = ref(
   {
-    "nip": "",
-    // "nip_baru": "",
-    "nik": "",
-    "nama": "",
-    "alamat": "",
-    "kelamin": "",
-    "templahir": "",
-    "tgllahir": "",
-    "jenispegawai": "",
-    "flag": "",
-    "jabatan": "",
-    "profesi": "",
-    // "jabatan_tmb": "",
-    "golruang": "",
-    "pendidikan": "",
-    "aktif": "",
+    'nip': '',
+    'nik': '',
+    'nama': '',
+    'alamat': '',
+    'kelamin': '',
+    'templahir': '',
+    'tgllahir': '',
+    'pass': '',
+    'telp': '',
+    'email': '',
 
-    "foto": "",
+    'aktif': '',
+    'jabatan': '',
+    'statusspesialis': '',
+    'kdgroupnakes': '',
+    'kddpjp': '',
+    'kdruangansim': '',
+    'satset_uuid': '',
+    'profesi': '',
 
-    "bagian": "",
-    "ruang": "",
-    "tgl_masuk": "",
-    "tgl_tmt": "",
-    // "id_simrs": "",
-    "kategoripegawai": "",
-    // "pass": "",
-    "alamat_detil": "",
-    "rt": "",
-    "rw": "",
-    "kelurahan": "",
-    "kecamatan": "",
-    "kota": "",
-    "agama": "",
-    "tmt_cpns": "",
-    "gaji_total": "",
-    "gaji_pokok": "",
-    "kel_ttg": "",
-    "th_mk_tmb": "",
-    "bln_mk_tmb": "",
-    "jurusan": "",
-    // "flagpas": "",
-    "telp": "",
-    "email": "",
-    // "id_absen": "",
-    // "jadwalkerja": "",
-    // "account_pass": "",
-    // "role_id": "",
-    "kode_ruang": "",
-    // "kdpegsimrs": "",
-    "statusspesialis": "",
-    "kdgroupnakes": "",
-    "kddpjp": "",
-    // "kdruangansim": "",
-    "satset_uuid": "",
-    "ttdpegawai": "",
-    // "kdarteri": "",
-    "created_at": "",
-    "updated_at": ""
+
   }
-
 )
+
+const jensikelamin = computed(() => [
+  { label: 'Laki-laki', value: 'Laki-laki' },
+  { label: 'Perempuan', value: 'Perempuan' }
+])
+const statuspegawai = computed(() => [
+  { label: 'Aktif', value: '' },
+  { label: 'Tidak Aktif', value: '1' }
+])
+function tglLahir(val) {
+  form.value.tgllahir = val
+
+}
 
 const error = computed(() => {
   const err = props.store.error
@@ -273,7 +298,7 @@ watch(() => (form.value), (newForm, oldForm) => {
 
 watch(() => (props.store.item), (newForm, oldForm) => {
   // console.log('🔥 watch form', newForm, oldForm);
-  const excludedKeys = ['created_at', 'updated_at']
+  const excludedKeys = ['created_at', 'updated_at', 'pass']
 
   if (newForm) {
     form.value = Object.fromEntries(
@@ -287,8 +312,14 @@ watch(() => (props.store.item), (newForm, oldForm) => {
 }, { deep: true })
 
 
-const handleSubmit = () => {
+const handleSubmit = (e) => {
+  e.preventDefault()
+  e.stopImmediatePropagation()
+
   props.store.create(form.value)
+
+  // console.log('form', form.value);
+
 }
 
 const handleReset = () => {

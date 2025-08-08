@@ -92,9 +92,10 @@
 
 
     <!-- table -->
-    <div class="col full-height">
-      <q-markup-table ref="refCellTable" flat bordered class="rounded-xl shadow-sm full-height relative-position head-x"
-        :dense="$q.screen.lt.md" :class="[dark ? 'bg-dark' : 'bg-white']">
+    <div class="col full-height full-width">
+      <q-markup-table ref="refCellTable" flat bordered
+        class="rounded-xl shadow-sm full-height relative-position head-x column-x" :dense="$q.screen.lt.md"
+        :class="[dark ? 'bg-dark' : 'bg-white']">
 
         <thead class="" :class="dark ? 'bg-black' : 'bg-grey-4'">
           <tr :class="dark ? 'bg-black' : 'bg-grey-4'">
@@ -118,7 +119,7 @@
               <div class="row items-center text-weight-bold">
                 <slot :name="'col-' + head" :row="head" :left="'col-grow text-left'" :right="'col-grow text-right'">
                   <div class="col-grow text-left">
-                    {{ head?.toUpperCase() }}
+                    {{ ubahSpace(head)?.toUpperCase() }}
                   </div>
                 </slot>
                 <div v-if="orderBy === head">
@@ -127,29 +128,29 @@
                 </div>
               </div>
             </th>
-            <th v-if="actionField" class="text-right">
+            <th v-if="actionField" class="text-right" width="5%">
               {{ labelAction || "Aksi" }}
             </th>
 
           </tr>
         </thead>
         <template v-if="!loading">
-          <tbody>
-            <template v-if="!items?.length">
-              <tr>
-                <td :colspan="rowImage === null ? filterColumn?.length + 2 : filterColumn?.length + 3">
-                  <div class="flex column flex-center bg-loading-bg__table" style="height:300px">
-                    <div>
-                      <q-icon name="icon-mat-receipt_long" color="primary" size="60px" />
-                    </div>
-                    <div class="text-primary q-mt-sm">
-                      Data Belum Ada
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </template>
-            <template v-else>
+
+          <template v-if="!items?.length">
+            <div class="column flex-center fit absolute-top" :class="dark ? 'bg-dark-page' : 'bg-grey-2'"
+              style="min-height:300px">
+              <div>
+                <q-icon name="icon-mat-layers" color="primary" size="50px" />
+              </div>
+              <div class="text-primary q-mt-sm">
+                Data Belum Ada
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <tbody>
+
+
               <tr v-for="(item, i) in items" :key="i" class="text-left" :class="[clickAble ? item.highlight === true ? 'cursor-pointer bg-light-blue-11' : 'cursor-pointer' : '',
               i % 2 === 0 ? dark ? 'bg-dark-page' : 'bg-grey-2' : ''
 
@@ -163,17 +164,18 @@
                 <td v-if="rowImage !== null" class="text-left">
                   <slot :name="'cell-default-img'" :row="item" />
                 </td>
-                <td v-for="( col, idx ) in filterColumn" :key="idx" width="10%" class="text-left">
+                <td v-for="(col, idx) in filterColumn" :key="idx" width="10%" class="text-left"
+                  style="vertical-align: top;">
                   <slot :name="'cell-' + col" :row="item" :index="i">
                     {{ item[col] }}
                   </slot>
                 </td>
-                <td class="text-right">
+                <td class="text-right" style="vertical-align: top; ">
                   <div class="row justify-end items-center">
                     <!-- class="q-ml-md" -->
                     <slot name="left-acttion" :row="item" :col="i" />
-                    <div v-if="actionField">
-                      <q-btn v-if="adaEdit" flat class="" size="sm" round color="grey" icon="icon-mat-edit"
+                    <div v-if="actionField" class="q-gutter-xs">
+                      <q-btn v-if="adaEdit" class="" size="sm" round color="grey" icon="icon-mat-edit"
                         @click="handleEdit(item)">
                         <q-tooltip anchor="top middle" self="center middle">
                           Edit Data
@@ -182,7 +184,7 @@
                       <template v-if="selected?.length < 2 && adaDelete">
                         <q-spinner v-if="store.loadingDelete && idRemove === item?.id" color="negative" size="1.5em"
                           :thickness="3" />
-                        <q-btn v-else flat class="" size="sm" round color="negative" icon="icon-mat-delete_sweep"
+                        <q-btn v-else class="" size="sm" round color="negative" icon="icon-mat-delete_sweep"
                           @click="deleteOne(item.id)">
                           <q-tooltip anchor="top middle" self="center middle">
                             Delete Data
@@ -197,8 +199,8 @@
                   </div>
                 </td>
               </tr>
-            </template>
-          </tbody>
+            </tbody>
+          </template>
         </template>
 
 
@@ -228,7 +230,7 @@
 
 <script setup>
 import { ref, watch, computed, onMounted } from 'vue'
-import { useQuasar } from 'quasar'
+import { useQuasar, getCssVar } from 'quasar'
 import PaginateTable from './PaginateTable.vue'
 
 const props = defineProps({
@@ -238,7 +240,7 @@ const props = defineProps({
   debounce: { type: Number, default: 300 },
   dark: { type: Boolean, default: false },
 
-  // content table 
+  // content table
   // Header
   columns: { type: Array, default: () => [] },
   columnHide: { type: Array, default: () => [] },
@@ -288,6 +290,11 @@ const filterColumn = computed(() => {
 
   return cols
 })
+
+function ubahSpace(text) {
+  return text.replace(/_/g, ' ')
+
+}
 
 
 const handleSearch = () => {
@@ -377,30 +384,19 @@ const goTo = (page) => {
 }
 
 
+const bgAction = computed(() => {
+  return props.dark ? getCssVar('dark') : getCssVar('dark-light')
+})
+
+
 </script>
 
 <style lang="scss" scoped>
 $fs : v-bind(ts);
 $pfs: v-bind(pts);
 
-// @mixin width-full($full: true) {
-//   @if $full {
-//     max-width: 100% !important;
-//   }
-// }
-
-// @mixin wrap($full: true) {
-//   @if $full {
-//     padding: 10px 10px;
-//     white-space: normal !important;
-//     word-wrap: normal !important;
-//     hyphens: manual;
-//   }
-
-//   @else {
-//     padding: 8px 10px;
-//   }
-// }
+$white: #fff;
+$aksi: v-bind(bgAction);
 
 .sticky-header {
   position: fixed;
@@ -422,23 +418,39 @@ $pfs: v-bind(pts);
   /* print width */
   font-size: $fs;
 
-  // .q-table{
-  //   @include width-full($full: true);
-  // }
   .q-table {
     max-width: 100% !important;
     max-height: 100% !important;
   }
+}
 
-  // .q-table td {
-  //   font-size: $fs;
-  //   @include wrap($full: false);
-  // }
 
-  // .q-table th {
-  //   font-size: $fs;
-  //   @include wrap($full: false);
-  // }
+.column-x {
+  // specifying max-width so the example can highlight
+  // the sticky column on any browser window
+  // max-width: 600px;
+
+  thead {
+    tr:last-child {
+      th:last-child {
+        // bg color is important for th; just specify one
+        background-color: $dark-light;
+        color: $white;
+      }
+    }
+  }
+
+  td:last-child {
+    background-color: $dark-light;
+    color: $white;
+  }
+
+  th:last-child,
+  td:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 1;
+  }
 }
 
 @media print {
