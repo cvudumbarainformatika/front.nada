@@ -1,5 +1,7 @@
 import { createTemplateMasterStore } from "./useTemplateMasterStore.js";
 
+
+// PEGAWAI
 export const useMasterJabatanStore = createTemplateMasterStore('jabatan', {
   baseUrl: '/v1/simrs/master/pegawai/jabatan',
   columns: ['kode_jabatan', 'jabatan'], // ini isi column table (untuk pertama kali)
@@ -57,6 +59,11 @@ export const useMasterPegawaiStore = createTemplateMasterStore('pegawai', {
   persist: false
 })
 
+
+
+
+
+// FARMASI
 export const useMasterObatStore = createTemplateMasterStore('obat', {
   baseUrl: '/v1/simrs/master/farmasi',
   columns: [
@@ -98,6 +105,28 @@ export const useMasterObatStore = createTemplateMasterStore('obat', {
     'status',
     'satuan'
 
+  ],
+  columnHide: [],
+  persist: false
+})
+
+
+
+
+
+// POLI
+export const useMasterPoliklinikRuanganStore = createTemplateMasterStore('poliklinik-ruangan', {
+  baseUrl: '/v1/simrs/master/poliklinik/ruangan',
+  primary: 'rs1',
+  columns: [
+    'rs1',
+    'rs2',
+    'rs3',
+    'rs4',
+    // 'rs5',
+    // 'rs6',
+    // 'rs7',
+    'panggil_antrian',
   ],
   columnHide: [],
   persist: false

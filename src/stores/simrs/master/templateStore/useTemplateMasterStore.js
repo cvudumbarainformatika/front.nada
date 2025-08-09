@@ -39,7 +39,7 @@ export function createTemplateMasterStore(storeId, config) {
       mode: 'add',
 
 
-      ...config.state
+      ...config?.state
     }),
 
     getters: {
@@ -143,7 +143,8 @@ export function createTemplateMasterStore(storeId, config) {
               }
 
             } else {
-              const index = this.items?.findIndex(item => item.id === result.id)
+              const primaryKey = config?.primary || 'id'
+              const index = this.items?.findIndex(item => item[primaryKey] === result[primaryKey])
               if (index !== -1) {
                 this.items[index] = { ...this.items[index], ...result }
               }

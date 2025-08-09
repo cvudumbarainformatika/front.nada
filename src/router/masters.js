@@ -195,6 +195,11 @@ const masters = {
           path: '/master/poliklinik/diagnosagizi',
           name: 'master.poliklinik.diagnosagizi',
           component: () => import('pages/simrs/master/poliklinik/diagnosagizi/IndexPage.vue')
+        },
+        {
+          path: '/master/poliklinik/ruangan',
+          name: 'master.poliklinik.ruangan',
+          component: () => import('pages/simrs/master/poliklinik/ruangan/IndexPage.vue')
         }
       ]
     },
