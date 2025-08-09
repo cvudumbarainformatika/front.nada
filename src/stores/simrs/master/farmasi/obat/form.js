@@ -61,7 +61,9 @@ export const useMasterObatForm = defineStore('master_Obat_form', {
     optionSistemBayars: [
       { label: 'SEMUA', value: 'SEMUA' },
       { label: 'UMUM', value: 'UMUM' },
-      { label: 'BPJS', value: 'BPJS' }
+      { label: 'BPJS', value: 'BPJS' },
+      { label: 'INHEALTH', value: 'INHEALTH' },
+      { label: 'PLN', value: 'PLN' },
     ],
     optionGudangs: [
       { label: 'Semua Gudang', value: '' },
